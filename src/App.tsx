@@ -15,6 +15,10 @@ import JobDetail from "./pages/JobDetail";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
+import BusinessRegister from "./pages/BusinessRegister";
+import BusinessDashboard from "./pages/BusinessDashboard";
+import PostJob from "./pages/PostJob";
+import ViewApplicants from "./pages/ViewApplicants";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -37,6 +41,10 @@ const App = () => (
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard/*" element={<Dashboard />} />
+            <Route path="/business" element={<BusinessDashboard />} />
+            <Route path="/business/register" element={<BusinessRegister />} />
+            <Route path="/business/post-job" element={<PostJob />} />
+            <Route path="/business/jobs/:jobId/applicants" element={<ViewApplicants />} />
             <Route path="/tutors" element={<Courses />} />
             <Route path="/tutors/:id" element={<Courses />} />
             <Route path="*" element={<NotFound />} />

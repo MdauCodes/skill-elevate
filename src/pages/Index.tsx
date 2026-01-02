@@ -165,7 +165,7 @@ const Index = () => {
       <section id="how-it-works" className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold">How Elevato Works</h2>
+            <h2 className="text-3xl md:text-4xl font-bold">How Mwanzo Works</h2>
             <p className="text-muted-foreground mt-2 max-w-xl mx-auto">
               From learning to landing your dream job in three simple steps
             </p>
@@ -204,7 +204,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold">Success Stories</h2>
-            <p className="text-muted-foreground mt-2">See how Elevato transformed careers</p>
+            <p className="text-muted-foreground mt-2">See how Mwanzo transformed careers</p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -227,7 +227,7 @@ const Index = () => {
           <div className="flex items-end justify-between mb-10">
             <div>
               <h2 className="text-3xl md:text-4xl font-bold">Fresh Job Opportunities</h2>
-              <p className="text-muted-foreground mt-2">Available exclusively to Elevato graduates</p>
+              <p className="text-muted-foreground mt-2">Available exclusively to Mwanzo graduates</p>
             </div>
             <Button variant="ghost" asChild className="hidden md:flex">
               <Link to="/jobs">

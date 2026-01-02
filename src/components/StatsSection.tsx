@@ -1,29 +1,28 @@
 import { useEffect, useState, useRef } from 'react';
 import { Users, BookOpen, Briefcase, Award } from 'lucide-react';
-import { platformStats } from '@/data/mockData';
 
 const stats = [
   {
     icon: Users,
-    value: platformStats.totalStudents,
+    value: 15000,
     suffix: '+',
     label: 'Active Students',
   },
   {
     icon: BookOpen,
-    value: platformStats.totalCourses,
+    value: 50,
     suffix: '+',
     label: 'Expert Courses',
   },
   {
     icon: Briefcase,
-    value: platformStats.jobsPlaced,
+    value: 120,
     suffix: '+',
     label: 'Jobs Filled',
   },
   {
     icon: Award,
-    value: platformStats.tutors,
+    value: 25,
     suffix: '+',
     label: 'Expert Tutors',
   },

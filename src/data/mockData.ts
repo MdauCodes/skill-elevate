@@ -1,4 +1,4 @@
-// Mock Data for Elevato Platform
+// Mock Data for Mwanzo Platform
 
 export interface Course {
   id: string;
@@ -37,6 +37,7 @@ export interface Lesson {
   duration: string;
   isPreview: boolean;
   videoUrl?: string;
+  youtubeId?: string; // For YouTube embeds
 }
 
 export interface Tutor {
@@ -78,6 +79,20 @@ export interface Job {
   requirements: string[];
   postedDate: string;
   isLocked?: boolean;
+  postedBy?: string;
+}
+
+export interface JobApplication {
+  id: string;
+  jobId: string;
+  applicantName: string;
+  applicantEmail: string;
+  applicantAvatar: string;
+  resumeUrl: string;
+  coverLetter: string;
+  appliedDate: string;
+  status: 'pending' | 'reviewed' | 'shortlisted' | 'rejected';
+  completedCourses: string[];
 }
 
 export interface Testimonial {
@@ -96,9 +111,12 @@ export interface User {
   name: string;
   email: string;
   avatar: string;
+  role: 'student' | 'business';
   enrolledCourses: string[];
   completedCourses: string[];
   certificates: string[];
+  companyName?: string;
+  postedJobs?: string[];
 }
 
 // Categories
@@ -197,7 +215,7 @@ export const tutors: Tutor[] = [
   },
 ];
 
-// Courses
+// Courses with YouTube video IDs for real educational content
 export const courses: Course[] = [
   {
     id: 'course-1',
@@ -216,7 +234,7 @@ export const courses: Course[] = [
     lessonsCount: 45,
     level: 'Beginner',
     thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=450&fit=crop',
-    previewVideo: 'https://player.vimeo.com/external/368320203.hd.mp4?s=38f6e51ec5f4b7aaac0c9d0a2c3b2e8a&profile_id=175',
+    previewVideo: 'https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4',
     isTrending: true,
     isFeatured: true,
     lastUpdated: 'December 2024',
@@ -237,16 +255,16 @@ export const courses: Course[] = [
       {
         title: 'Introduction to Digital Marketing',
         lessons: [
-          { id: 'l1', title: 'Welcome & Course Overview', duration: '5:30', isPreview: true },
+          { id: 'l1', title: 'Welcome & Course Overview', duration: '5:30', isPreview: true, youtubeId: 'bixR-KIJKYM' },
           { id: 'l2', title: 'The Digital Marketing Landscape in Kenya', duration: '12:45', isPreview: true },
-          { id: 'l3', title: 'Setting Up Your Marketing Toolkit', duration: '18:20', isPreview: false },
+          { id: 'l3', title: 'Setting Up Your Marketing Toolkit', duration: '18:20', isPreview: false, youtubeId: '8aGhZQkoFbQ' },
         ],
       },
       {
         title: 'Search Engine Optimization (SEO)',
         lessons: [
-          { id: 'l4', title: 'SEO Fundamentals', duration: '15:00', isPreview: false },
-          { id: 'l5', title: 'Keyword Research for African Markets', duration: '22:30', isPreview: false },
+          { id: 'l4', title: 'SEO Fundamentals', duration: '15:00', isPreview: false, youtubeId: 'IkmETRfO6B8' },
+          { id: 'l5', title: 'Keyword Research for African Markets', duration: '22:30', isPreview: false, youtubeId: 'qz0aGYrrlhU' },
           { id: 'l6', title: 'On-Page Optimization Techniques', duration: '25:15', isPreview: false },
           { id: 'l7', title: 'Building Quality Backlinks', duration: '20:00', isPreview: false },
         ],
@@ -254,7 +272,7 @@ export const courses: Course[] = [
       {
         title: 'Social Media Marketing',
         lessons: [
-          { id: 'l8', title: 'Facebook Marketing Masterclass', duration: '30:00', isPreview: false },
+          { id: 'l8', title: 'Facebook Marketing Masterclass', duration: '30:00', isPreview: false, youtubeId: 'B6JVLdKcF_E' },
           { id: 'l9', title: 'Instagram for Business Growth', duration: '28:00', isPreview: false },
           { id: 'l10', title: 'Twitter/X Strategy for Brands', duration: '18:00', isPreview: false },
           { id: 'l11', title: 'TikTok Marketing Essentials', duration: '22:00', isPreview: false },
@@ -279,7 +297,7 @@ export const courses: Course[] = [
     lessonsCount: 52,
     level: 'Intermediate',
     thumbnail: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop',
-    previewVideo: 'https://player.vimeo.com/external/368320203.hd.mp4?s=38f6e51ec5f4b7aaac0c9d0a2c3b2e8a&profile_id=175',
+    previewVideo: 'https://cdn.pixabay.com/video/2019/06/19/24569-343001767_large.mp4',
     isTrending: true,
     isFeatured: true,
     lastUpdated: 'December 2024',
@@ -300,15 +318,15 @@ export const courses: Course[] = [
       {
         title: 'AI Fundamentals',
         lessons: [
-          { id: 'l1', title: 'What is Artificial Intelligence?', duration: '10:00', isPreview: true },
-          { id: 'l2', title: 'Machine Learning Explained Simply', duration: '15:00', isPreview: true },
+          { id: 'l1', title: 'What is Artificial Intelligence?', duration: '10:00', isPreview: true, youtubeId: 'ad79nYk2keg' },
+          { id: 'l2', title: 'Machine Learning Explained Simply', duration: '15:00', isPreview: true, youtubeId: 'ukzFI9rgwfU' },
           { id: 'l3', title: 'AI in the African Context', duration: '12:00', isPreview: false },
         ],
       },
       {
         title: 'Practical AI Tools',
         lessons: [
-          { id: 'l4', title: 'Mastering ChatGPT for Business', duration: '25:00', isPreview: false },
+          { id: 'l4', title: 'Mastering ChatGPT for Business', duration: '25:00', isPreview: false, youtubeId: 'jBKGihP-_AE' },
           { id: 'l5', title: 'Advanced Prompting Techniques', duration: '30:00', isPreview: false },
           { id: 'l6', title: 'Claude for Document Analysis', duration: '22:00', isPreview: false },
         ],
@@ -332,7 +350,7 @@ export const courses: Course[] = [
     lessonsCount: 120,
     level: 'Beginner',
     thumbnail: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=450&fit=crop',
-    previewVideo: 'https://player.vimeo.com/external/368320203.hd.mp4?s=38f6e51ec5f4b7aaac0c9d0a2c3b2e8a&profile_id=175',
+    previewVideo: 'https://cdn.pixabay.com/video/2020/02/12/32489-392015291_large.mp4',
     isTrending: true,
     isFeatured: true,
     lastUpdated: 'December 2024',
@@ -353,17 +371,25 @@ export const courses: Course[] = [
       {
         title: 'HTML & CSS Foundations',
         lessons: [
-          { id: 'l1', title: 'Your First Web Page', duration: '15:00', isPreview: true },
-          { id: 'l2', title: 'CSS Styling Basics', duration: '20:00', isPreview: true },
+          { id: 'l1', title: 'Your First Web Page', duration: '15:00', isPreview: true, youtubeId: 'UB1O30fR-EE' },
+          { id: 'l2', title: 'CSS Styling Basics', duration: '20:00', isPreview: true, youtubeId: 'yfoY53QXEnI' },
           { id: 'l3', title: 'Responsive Design', duration: '25:00', isPreview: false },
         ],
       },
       {
         title: 'JavaScript Essentials',
         lessons: [
-          { id: 'l4', title: 'JavaScript Fundamentals', duration: '30:00', isPreview: false },
+          { id: 'l4', title: 'JavaScript Fundamentals', duration: '30:00', isPreview: false, youtubeId: 'hdI2bqOjy3c' },
           { id: 'l5', title: 'DOM Manipulation', duration: '25:00', isPreview: false },
           { id: 'l6', title: 'Async JavaScript', duration: '28:00', isPreview: false },
+        ],
+      },
+      {
+        title: 'React Development',
+        lessons: [
+          { id: 'l7', title: 'Introduction to React', duration: '35:00', isPreview: false, youtubeId: 'bMknfKXIFA8' },
+          { id: 'l8', title: 'Components and Props', duration: '28:00', isPreview: false },
+          { id: 'l9', title: 'State Management', duration: '32:00', isPreview: false },
         ],
       },
     ],
@@ -385,7 +411,7 @@ export const courses: Course[] = [
     lessonsCount: 28,
     level: 'Beginner',
     thumbnail: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=450&fit=crop',
-    previewVideo: 'https://player.vimeo.com/external/368320203.hd.mp4?s=38f6e51ec5f4b7aaac0c9d0a2c3b2e8a&profile_id=175',
+    previewVideo: 'https://cdn.pixabay.com/video/2020/07/30/45603-445912296_large.mp4',
     isFeatured: true,
     lastUpdated: 'November 2024',
     whatYouLearn: [
@@ -405,8 +431,17 @@ export const courses: Course[] = [
       {
         title: 'Social Media Strategy',
         lessons: [
-          { id: 'l1', title: 'Understanding Your Audience', duration: '12:00', isPreview: true },
+          { id: 'l1', title: 'Understanding Your Audience', duration: '12:00', isPreview: true, youtubeId: 'I2pwcAVonKI' },
           { id: 'l2', title: 'Platform Selection Strategy', duration: '15:00', isPreview: true },
+          { id: 'l3', title: 'Content Planning and Calendars', duration: '20:00', isPreview: false },
+        ],
+      },
+      {
+        title: 'Content Creation',
+        lessons: [
+          { id: 'l4', title: 'Creating Engaging Posts', duration: '18:00', isPreview: false },
+          { id: 'l5', title: 'Video Content for Social Media', duration: '25:00', isPreview: false },
+          { id: 'l6', title: 'Using Canva Like a Pro', duration: '20:00', isPreview: false },
         ],
       },
     ],
@@ -428,7 +463,8 @@ export const courses: Course[] = [
     lessonsCount: 68,
     level: 'Beginner',
     thumbnail: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&h=450&fit=crop',
-    previewVideo: 'https://player.vimeo.com/external/368320203.hd.mp4?s=38f6e51ec5f4b7aaac0c9d0a2c3b2e8a&profile_id=175',
+    previewVideo: 'https://cdn.pixabay.com/video/2021/04/06/69893-533515618_large.mp4',
+    isFeatured: true,
     lastUpdated: 'November 2024',
     whatYouLearn: [
       'Master Figma for UI/UX design',
@@ -447,8 +483,16 @@ export const courses: Course[] = [
       {
         title: 'Design Fundamentals',
         lessons: [
-          { id: 'l1', title: 'Principles of Good Design', duration: '18:00', isPreview: true },
+          { id: 'l1', title: 'Principles of Good Design', duration: '18:00', isPreview: true, youtubeId: 'YqQx75OPRa0' },
           { id: 'l2', title: 'Color Theory Essentials', duration: '20:00', isPreview: true },
+          { id: 'l3', title: 'Typography Mastery', duration: '22:00', isPreview: false },
+        ],
+      },
+      {
+        title: 'Figma Mastery',
+        lessons: [
+          { id: 'l4', title: 'Getting Started with Figma', duration: '25:00', isPreview: false, youtubeId: 'FTFaQWZBqQ8' },
+          { id: 'l5', title: 'Advanced Figma Techniques', duration: '30:00', isPreview: false },
         ],
       },
     ],
@@ -470,7 +514,7 @@ export const courses: Course[] = [
     lessonsCount: 42,
     level: 'Beginner',
     thumbnail: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=450&fit=crop',
-    previewVideo: 'https://player.vimeo.com/external/368320203.hd.mp4?s=38f6e51ec5f4b7aaac0c9d0a2c3b2e8a&profile_id=175',
+    previewVideo: 'https://cdn.pixabay.com/video/2016/09/21/5106-183629262_large.mp4',
     lastUpdated: 'October 2024',
     whatYouLearn: [
       'Professional video shooting techniques',
@@ -489,93 +533,116 @@ export const courses: Course[] = [
       {
         title: 'Video Fundamentals',
         lessons: [
-          { id: 'l1', title: 'Camera Settings Explained', duration: '15:00', isPreview: true },
+          { id: 'l1', title: 'Camera Settings Explained', duration: '15:00', isPreview: true, youtubeId: 'LKnqECcg6Gw' },
           { id: 'l2', title: 'Composition and Framing', duration: '18:00', isPreview: true },
+          { id: 'l3', title: 'Lighting for Video', duration: '20:00', isPreview: false },
+        ],
+      },
+      {
+        title: 'Video Editing',
+        lessons: [
+          { id: 'l4', title: 'Introduction to DaVinci Resolve', duration: '25:00', isPreview: false, youtubeId: '63Ln33O4p4c' },
+          { id: 'l5', title: 'Cutting and Transitions', duration: '22:00', isPreview: false },
         ],
       },
     ],
   },
   {
     id: 'course-7',
-    slug: 'data-analytics-business-intelligence',
-    title: 'Data Analytics & Business Intelligence',
-    shortDescription: 'Transform data into actionable insights with Excel, SQL, and Power BI.',
-    description: 'Data analytics is one of the most in-demand skills in Kenya. Learn to collect, analyze, and visualize data to drive business decisions.',
+    slug: 'data-analytics-excel-powerbi',
+    title: 'Data Analytics with Excel & Power BI',
+    shortDescription: 'Transform raw data into actionable insights using Excel and Power BI.',
+    description: 'Learn to analyze data like a pro using tools that businesses in Kenya use daily. From Excel formulas to Power BI dashboards, become the data expert every company needs.',
     tutor: tutors[1],
     category: categories[1],
-    price: 10500,
-    originalPrice: 16000,
+    price: 8000,
+    originalPrice: 12000,
     rating: 4.7,
     reviewCount: 567,
-    studentCount: 2800,
+    studentCount: 3400,
     duration: '20 hours',
     lessonsCount: 55,
-    level: 'Intermediate',
+    level: 'Beginner',
     thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop',
-    previewVideo: 'https://player.vimeo.com/external/368320203.hd.mp4?s=38f6e51ec5f4b7aaac0c9d0a2c3b2e8a&profile_id=175',
+    previewVideo: 'https://cdn.pixabay.com/video/2020/08/12/46966-449626928_large.mp4',
+    isFeatured: true,
     lastUpdated: 'December 2024',
     whatYouLearn: [
-      'Advanced Excel for data analysis',
-      'SQL for database querying',
-      'Data visualization with Power BI',
-      'Statistical analysis fundamentals',
-      'Create executive dashboards',
+      'Advanced Excel formulas and functions',
+      'Data cleaning and transformation',
+      'Create professional dashboards in Power BI',
+      'Statistical analysis for business decisions',
+      'Automate reports and workflows',
       'Present data insights effectively',
     ],
     requirements: [
-      'Basic Excel knowledge helpful',
+      'Basic Excel knowledge helpful but not required',
+      'Access to Microsoft Excel (any version)',
       'Analytical mindset',
-      'Access to Microsoft Excel',
     ],
     curriculum: [
       {
         title: 'Excel Mastery',
         lessons: [
-          { id: 'l1', title: 'Advanced Excel Functions', duration: '25:00', isPreview: true },
-          { id: 'l2', title: 'Pivot Tables Deep Dive', duration: '30:00', isPreview: false },
+          { id: 'l1', title: 'Advanced Excel Functions', duration: '25:00', isPreview: true, youtubeId: 'Vl0H-qTclOg' },
+          { id: 'l2', title: 'Pivot Tables Deep Dive', duration: '30:00', isPreview: true },
+        ],
+      },
+      {
+        title: 'Power BI Fundamentals',
+        lessons: [
+          { id: 'l3', title: 'Getting Started with Power BI', duration: '20:00', isPreview: false, youtubeId: 'AGrl-H87pRU' },
+          { id: 'l4', title: 'Creating Interactive Dashboards', duration: '35:00', isPreview: false },
         ],
       },
     ],
   },
   {
     id: 'course-8',
-    slug: 'e-commerce-mpesa-integration',
-    title: 'E-commerce & M-Pesa Integration',
-    shortDescription: 'Build and launch online stores with seamless M-Pesa payment integration.',
-    description: 'Learn to build successful e-commerce businesses in Kenya with a focus on M-Pesa integration, the backbone of Kenyan digital payments.',
+    slug: 'mobile-app-development-flutter',
+    title: 'Mobile App Development with Flutter',
+    shortDescription: 'Build beautiful cross-platform mobile apps for iOS and Android with Flutter.',
+    description: 'Create stunning mobile applications that work on both iOS and Android from a single codebase. Perfect for entrepreneurs and developers targeting the Kenyan mobile-first market.',
     tutor: tutors[2],
     category: categories[2],
-    price: 11000,
-    originalPrice: 17000,
+    price: 18000,
+    originalPrice: 28000,
     rating: 4.9,
-    reviewCount: 789,
-    studentCount: 4200,
-    duration: '16 hours',
-    lessonsCount: 48,
+    reviewCount: 324,
+    studentCount: 1800,
+    duration: '35 hours',
+    lessonsCount: 85,
     level: 'Intermediate',
-    thumbnail: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=450&fit=crop',
-    previewVideo: 'https://player.vimeo.com/external/368320203.hd.mp4?s=38f6e51ec5f4b7aaac0c9d0a2c3b2e8a&profile_id=175',
+    thumbnail: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=450&fit=crop',
+    previewVideo: 'https://cdn.pixabay.com/video/2020/03/21/33444-399959023_large.mp4',
     isTrending: true,
     lastUpdated: 'December 2024',
     whatYouLearn: [
-      'Set up online stores with WooCommerce and Shopify',
-      'Integrate M-Pesa STK Push payments',
-      'Handle M-Pesa payment callbacks',
-      'Build custom checkout experiences',
-      'Manage inventory and orders',
-      'Scale e-commerce operations',
+      'Dart programming language fundamentals',
+      'Flutter widgets and layouts',
+      'State management with Provider and Riverpod',
+      'Integration with REST APIs and Firebase',
+      'M-Pesa payment integration for mobile',
+      'Publishing apps to Play Store and App Store',
     ],
     requirements: [
-      'Basic web development knowledge',
-      'Understanding of HTTP and APIs',
-      'Access to M-Pesa business account (for testing)',
+      'Basic programming knowledge helpful',
+      'Computer with Flutter SDK installed',
+      'Android or iOS device for testing',
     ],
     curriculum: [
       {
-        title: 'E-commerce Foundations',
+        title: 'Flutter Basics',
         lessons: [
-          { id: 'l1', title: 'E-commerce in Kenya Overview', duration: '12:00', isPreview: true },
-          { id: 'l2', title: 'Choosing Your Platform', duration: '18:00', isPreview: true },
+          { id: 'l1', title: 'Introduction to Flutter', duration: '20:00', isPreview: true, youtubeId: 'VPvVD8t02U8' },
+          { id: 'l2', title: 'Dart Programming Essentials', duration: '35:00', isPreview: true },
+        ],
+      },
+      {
+        title: 'Building Your First App',
+        lessons: [
+          { id: 'l3', title: 'Widgets and Layouts', duration: '40:00', isPreview: false },
+          { id: 'l4', title: 'Navigation and Routing', duration: '25:00', isPreview: false },
         ],
       },
     ],
@@ -588,178 +655,254 @@ export const jobs: Job[] = [
     id: 'job-1',
     title: 'Social Media Manager',
     company: 'TechHub Nairobi',
-    companyLogo: 'https://images.unsplash.com/photo-1560179707-f14e90ef3623?w=100&h=100&fit=crop',
+    companyLogo: 'https://ui-avatars.com/api/?name=TH&background=0d9488&color=fff&size=100',
     location: 'Nairobi (Hybrid)',
     type: 'Full-time',
     salary: 'KES 60,000 - 80,000/month',
-    requiredSkills: ['Social Media Management', 'Content Creation', 'Analytics'],
+    requiredSkills: ['Social Media Marketing', 'Content Creation', 'Analytics', 'Community Management'],
     requiredCourses: ['course-4'],
-    description: 'We are looking for a creative Social Media Manager to join our growing team. You will be responsible for managing our social media presence across all platforms.',
+    description: 'We are looking for a creative Social Media Manager to lead our digital presence and engage with our growing community of tech enthusiasts across Kenya.',
     responsibilities: [
-      'Develop and execute social media strategy',
-      'Create engaging content for all platforms',
-      'Monitor and respond to community engagement',
-      'Analyze metrics and prepare reports',
+      'Develop and execute social media strategies across all platforms',
+      'Create engaging content including graphics, videos, and copy',
+      'Monitor trends and engage with the tech community',
+      'Analyze performance metrics and optimize campaigns',
+      'Collaborate with the marketing team on campaigns',
     ],
     requirements: [
-      'Proven social media management experience',
-      'Strong content creation skills',
-      'Understanding of Kenyan digital landscape',
+      'Proven experience managing social media accounts',
+      'Strong understanding of Kenyan digital landscape',
+      'Excellent written and verbal communication',
+      'Experience with social media management tools',
+      'Portfolio of previous social media work',
     ],
     postedDate: '2 days ago',
+    postedBy: 'business-1',
   },
   {
     id: 'job-2',
     title: 'Junior Web Developer',
     company: 'Safaricom PLC',
-    companyLogo: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=100&h=100&fit=crop',
+    companyLogo: 'https://ui-avatars.com/api/?name=SP&background=4caf50&color=fff&size=100',
     location: 'Nairobi',
     type: 'Full-time',
     salary: 'KES 80,000 - 120,000/month',
-    requiredSkills: ['HTML', 'CSS', 'JavaScript', 'React'],
+    requiredSkills: ['HTML', 'CSS', 'JavaScript', 'React', 'Node.js'],
     requiredCourses: ['course-3'],
-    description: 'Join Kenya\'s leading telecommunications company as a Junior Web Developer. Work on cutting-edge projects that impact millions of Kenyans.',
+    description: 'Join Safaricom\'s digital team as a Junior Web Developer and help build innovative solutions for millions of Kenyan customers.',
     responsibilities: [
-      'Develop responsive web applications',
-      'Collaborate with UI/UX designers',
-      'Write clean, maintainable code',
-      'Participate in code reviews',
+      'Develop and maintain web applications using React',
+      'Collaborate with designers on UI/UX implementation',
+      'Write clean, testable code following best practices',
+      'Participate in code reviews and team discussions',
+      'Learn and adapt to new technologies quickly',
     ],
     requirements: [
-      'Strong foundation in web technologies',
-      'Familiarity with React or similar frameworks',
+      'Proficiency in HTML, CSS, and JavaScript',
+      'Experience with React or similar frameworks',
+      'Understanding of RESTful APIs',
       'Problem-solving mindset',
+      'Degree in Computer Science or equivalent experience',
     ],
     postedDate: '5 days ago',
+    postedBy: 'business-2',
   },
   {
     id: 'job-3',
     title: 'Digital Marketing Specialist',
     company: 'Kenya Airways',
-    companyLogo: 'https://images.unsplash.com/photo-1569629743817-70d8db6c323b?w=100&h=100&fit=crop',
+    companyLogo: 'https://ui-avatars.com/api/?name=KQ&background=dc2626&color=fff&size=100',
     location: 'Nairobi',
     type: 'Contract',
     salary: 'KES 100,000 - 150,000/month',
-    requiredSkills: ['SEO', 'Google Ads', 'Social Media Marketing'],
+    requiredSkills: ['SEO', 'Google Ads', 'Facebook Ads', 'Analytics', 'Content Marketing'],
     requiredCourses: ['course-1'],
-    description: 'Kenya Airways is seeking a Digital Marketing Specialist to drive our online presence and customer acquisition.',
+    description: 'Kenya Airways is seeking a Digital Marketing Specialist to drive our online presence and customer acquisition through innovative digital strategies.',
     responsibilities: [
       'Plan and execute digital marketing campaigns',
-      'Manage SEO and SEM initiatives',
-      'Optimize conversion funnels',
-      'Report on campaign performance',
+      'Manage Google Ads and social media advertising budgets',
+      'Optimize website content for SEO',
+      'Track and report on campaign performance',
+      'Work with agencies on creative development',
     ],
     requirements: [
-      'Proven digital marketing experience',
-      'Google Ads certification preferred',
-      'Strong analytical skills',
+      'Proven experience in digital marketing',
+      'Google Ads and Analytics certification preferred',
+      'Experience with marketing automation tools',
+      'Strong analytical and reporting skills',
+      'Knowledge of the travel and aviation industry is a plus',
     ],
     postedDate: '1 week ago',
+    postedBy: 'business-3',
   },
   {
     id: 'job-4',
-    title: 'AI Solutions Architect',
+    title: 'AI Solutions Consultant',
     company: 'IBM Research Africa',
-    companyLogo: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100&h=100&fit=crop',
+    companyLogo: 'https://ui-avatars.com/api/?name=IBM&background=1e40af&color=fff&size=100',
     location: 'Nairobi',
     type: 'Full-time',
-    salary: 'KES 200,000 - 350,000/month',
-    requiredSkills: ['Machine Learning', 'Python', 'AI Strategy'],
+    salary: 'KES 150,000 - 250,000/month',
+    requiredSkills: ['AI Strategy', 'Machine Learning', 'Business Analysis', 'Python', 'Data Science'],
     requiredCourses: ['course-2'],
-    description: 'Help shape the future of AI in Africa. We are looking for an AI Solutions Architect to design and implement AI solutions for enterprise clients.',
+    description: 'Help African businesses transform through AI implementation. Work with enterprise clients to design and deploy cutting-edge AI solutions.',
     responsibilities: [
-      'Design AI/ML solutions for clients',
-      'Lead technical AI implementations',
-      'Advise on AI strategy and adoption',
-      'Mentor junior team members',
+      'Assess client needs and propose AI solutions',
+      'Lead proof-of-concept projects',
+      'Train client teams on AI tools and best practices',
+      'Stay current with AI trends and research',
+      'Contribute to thought leadership content',
     ],
     requirements: [
-      'Strong understanding of AI/ML concepts',
-      'Experience with AI implementation',
-      'Excellent communication skills',
+      'Experience implementing AI/ML solutions',
+      'Strong business acumen and consulting skills',
+      'Excellent presentation and communication',
+      'Technical background in data science or engineering',
+      'Experience with enterprise clients preferred',
     ],
     postedDate: '3 days ago',
+    postedBy: 'business-4',
   },
   {
     id: 'job-5',
     title: 'Graphic Designer',
-    company: 'Ogilvy Africa',
-    companyLogo: 'https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?w=100&h=100&fit=crop',
-    location: 'Nairobi',
+    company: 'Equity Bank',
+    companyLogo: 'https://ui-avatars.com/api/?name=EQ&background=f59e0b&color=fff&size=100',
+    location: 'Nairobi (Hybrid)',
     type: 'Full-time',
     salary: 'KES 70,000 - 100,000/month',
-    requiredSkills: ['Adobe Creative Suite', 'Figma', 'Brand Design'],
+    requiredSkills: ['Figma', 'Adobe Creative Suite', 'UI/UX Design', 'Brand Design', 'Motion Graphics'],
     requiredCourses: ['course-5'],
-    description: 'Join one of Africa\'s leading advertising agencies as a Graphic Designer. Work on campaigns for major brands across the continent.',
+    description: 'Join Equity Bank\'s creative team and help design visual experiences that reach millions of customers across Africa.',
     responsibilities: [
-      'Create visual designs for campaigns',
-      'Collaborate with creative teams',
-      'Develop brand identities',
-      'Produce print and digital materials',
+      'Create marketing materials for digital and print',
+      'Design UI components for mobile banking apps',
+      'Develop brand-consistent visual assets',
+      'Collaborate with marketing on campaign visuals',
+      'Maintain and update brand guidelines',
     ],
     requirements: [
-      'Strong portfolio demonstrating creativity',
-      'Proficiency in design software',
-      'Understanding of brand design principles',
+      'Proficiency in Figma and Adobe Creative Suite',
+      'Strong portfolio demonstrating design skills',
+      'Understanding of brand and marketing design',
+      'Experience with motion graphics is a plus',
+      'Ability to work under tight deadlines',
     ],
-    postedDate: '4 days ago',
+    postedDate: '1 week ago',
+    postedBy: 'business-5',
   },
   {
     id: 'job-6',
-    title: 'E-commerce Developer',
-    company: 'Jumia Kenya',
-    companyLogo: 'https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=100&h=100&fit=crop',
-    location: 'Nairobi (Remote)',
+    title: 'Video Content Creator',
+    company: 'Nation Media Group',
+    companyLogo: 'https://ui-avatars.com/api/?name=NMG&background=7c3aed&color=fff&size=100',
+    location: 'Nairobi',
     type: 'Full-time',
-    salary: 'KES 120,000 - 180,000/month',
-    requiredSkills: ['JavaScript', 'E-commerce Platforms', 'M-Pesa Integration'],
-    requiredCourses: ['course-3', 'course-8'],
-    description: 'Build and improve the leading e-commerce platform in Africa. Work on payment integrations, checkout flows, and more.',
+    salary: 'KES 55,000 - 75,000/month',
+    requiredSkills: ['Video Editing', 'Adobe Premiere', 'DaVinci Resolve', 'Storytelling', 'Camera Operation'],
+    requiredCourses: ['course-6'],
+    description: 'Create compelling video content for Kenya\'s leading media house across news, entertainment, and digital platforms.',
     responsibilities: [
-      'Develop e-commerce features',
-      'Integrate payment gateways',
-      'Optimize checkout experience',
-      'Build internal tools',
+      'Produce video content for social media and web',
+      'Edit news packages and feature stories',
+      'Shoot and produce short-form content',
+      'Collaborate with journalists and producers',
+      'Maintain video equipment and archives',
     ],
     requirements: [
-      'Experience with e-commerce development',
-      'Understanding of M-Pesa integration',
-      'Strong JavaScript skills',
+      'Experience with video editing software',
+      'Understanding of storytelling principles',
+      'Ability to work in fast-paced environment',
+      'Knowledge of current social media trends',
+      'Portfolio of previous video work required',
     ],
-    postedDate: '1 day ago',
+    postedDate: '4 days ago',
+    postedBy: 'business-6',
+  },
+];
+
+// Mock Job Applications
+export const mockApplications: JobApplication[] = [
+  {
+    id: 'app-1',
+    jobId: 'job-1',
+    applicantName: 'Grace Wanjiru',
+    applicantEmail: 'grace.w@email.com',
+    applicantAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+    resumeUrl: '#',
+    coverLetter: 'I am excited to apply for the Social Media Manager position. With my recent certification from Mwanzo in Social Media Management and 2 years of experience managing brand accounts, I am confident I can help TechHub Nairobi grow its digital presence...',
+    appliedDate: '2 days ago',
+    status: 'pending',
+    completedCourses: ['course-4', 'course-1'],
+  },
+  {
+    id: 'app-2',
+    jobId: 'job-1',
+    applicantName: 'David Kimani',
+    applicantEmail: 'david.k@email.com',
+    applicantAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+    resumeUrl: '#',
+    coverLetter: 'As a graduate of the Mwanzo Social Media Management course, I have developed strong skills in content creation and community engagement. I would love to bring my passion for tech and social media to TechHub Nairobi...',
+    appliedDate: '1 day ago',
+    status: 'reviewed',
+    completedCourses: ['course-4'],
+  },
+  {
+    id: 'app-3',
+    jobId: 'job-2',
+    applicantName: 'Peter Mwangi',
+    applicantEmail: 'peter.m@email.com',
+    applicantAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop',
+    resumeUrl: '#',
+    coverLetter: 'I recently completed the Full Stack Web Development Bootcamp at Mwanzo and built several projects including an e-commerce platform. I am eager to apply my React and Node.js skills at Safaricom...',
+    appliedDate: '3 days ago',
+    status: 'shortlisted',
+    completedCourses: ['course-3'],
+  },
+  {
+    id: 'app-4',
+    jobId: 'job-3',
+    applicantName: 'Sarah Odhiambo',
+    applicantEmail: 'sarah.o@email.com',
+    applicantAvatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&h=100&fit=crop',
+    resumeUrl: '#',
+    coverLetter: 'With my Digital Marketing Masterclass certification and experience running campaigns for local businesses, I am well-prepared to help Kenya Airways enhance its digital marketing efforts...',
+    appliedDate: '5 days ago',
+    status: 'pending',
+    completedCourses: ['course-1', 'course-4'],
   },
 ];
 
 // Testimonials
 export const testimonials: Testimonial[] = [
   {
-    id: 'test-1',
+    id: 'testimonial-1',
     name: 'David Kimani',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
     jobTitle: 'Web Developer',
-    company: 'Microsoft',
+    company: 'Microsoft Kenya',
     courseCompleted: 'Full Stack Web Development Bootcamp',
-    quote: 'I went from zero coding knowledge to landing a job at Microsoft in just 6 months! The course was practical and the job board connected me directly with employers.',
+    quote: 'I went from zero coding knowledge to landing a job at Microsoft in just 6 months! The course was practical, and the job board connected me directly with employers who valued my Mwanzo certification.',
     rating: 5,
   },
   {
-    id: 'test-2',
+    id: 'testimonial-2',
     name: 'Grace Wanjiru',
-    avatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop',
     jobTitle: 'Social Media Manager',
     company: 'Equity Bank',
     courseCompleted: 'Social Media Management for Kenyan Brands',
-    quote: 'The skills I learned helped me manage Equity Bank\'s social media. The certification was recognized by my employer and I got a 40% salary increase!',
+    quote: 'The skills I learned helped me manage Equity Bank\'s social media presence. My Mwanzo certification was recognized by my employer, and I got a 40% salary increase!',
     rating: 5,
   },
   {
-    id: 'test-3',
-    name: 'Brian Otieno',
+    id: 'testimonial-3',
+    name: 'Peter Ochieng',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop',
-    jobTitle: 'Digital Marketing Lead',
-    company: 'NCBA Bank',
-    courseCompleted: 'Complete Digital Marketing Masterclass',
-    quote: 'Elevato transformed my career. The practical approach to digital marketing, especially for Kenyan markets, was exactly what I needed to stand out.',
+    jobTitle: 'AI Consultant',
+    company: 'Deloitte Kenya',
+    courseCompleted: 'AI & Machine Learning for Business',
+    quote: 'The AI course gave me the confidence to transition into consulting. Now I help Kenyan businesses implement AI solutions. Mwanzo truly changed my career trajectory.',
     rating: 5,
   },
 ];
@@ -767,18 +910,59 @@ export const testimonials: Testimonial[] = [
 // Mock User
 export const mockUser: User = {
   id: 'user-1',
-  name: 'John Mwangi',
-  email: 'john.mwangi@email.com',
-  avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
-  enrolledCourses: ['course-1', 'course-3'],
-  completedCourses: ['course-4'],
-  certificates: ['course-4'],
+  name: 'John Doe',
+  email: 'john@example.com',
+  avatar: 'https://ui-avatars.com/api/?name=John+Doe&background=0d9488&color=fff',
+  role: 'student',
+  enrolledCourses: [],
+  completedCourses: [],
+  certificates: [],
 };
 
-// Stats
-export const platformStats = {
-  totalStudents: 15000,
-  totalCourses: 50,
-  jobsPlaced: 320,
-  tutors: 25,
+// Mock Business User
+export const mockBusinessUser: User = {
+  id: 'business-1',
+  name: 'TechHub Admin',
+  email: 'admin@techhub.co.ke',
+  avatar: 'https://ui-avatars.com/api/?name=TH&background=0d9488&color=fff',
+  role: 'business',
+  enrolledCourses: [],
+  completedCourses: [],
+  certificates: [],
+  companyName: 'TechHub Nairobi',
+  postedJobs: ['job-1'],
 };
+
+// Reviews for courses
+export const courseReviews = [
+  {
+    id: 'review-1',
+    courseId: 'course-1',
+    userName: 'James Mwangi',
+    userAvatar: 'https://ui-avatars.com/api/?name=JM&background=0d9488&color=fff',
+    rating: 5,
+    comment: 'Excellent course! Janet explains complex marketing concepts in a way that\'s easy to understand. The Kenyan context made it even more relevant.',
+    date: '2 weeks ago',
+    helpful: 45,
+  },
+  {
+    id: 'review-2',
+    courseId: 'course-1',
+    userName: 'Ann Nyambura',
+    userAvatar: 'https://ui-avatars.com/api/?name=AN&background=0d9488&color=fff',
+    rating: 4,
+    comment: 'Great content and practical examples. I immediately applied what I learned to my small business and saw results within weeks.',
+    date: '1 month ago',
+    helpful: 32,
+  },
+  {
+    id: 'review-3',
+    courseId: 'course-3',
+    userName: 'Kevin Otieno',
+    userAvatar: 'https://ui-avatars.com/api/?name=KO&background=0d9488&color=fff',
+    rating: 5,
+    comment: 'Mary is an amazing instructor. The projects are challenging but she provides great support. I landed my first dev job after completing this course!',
+    date: '3 weeks ago',
+    helpful: 67,
+  },
+];

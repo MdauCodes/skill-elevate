@@ -27,7 +27,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   useEffect(() => {
     // Check for stored auth on mount
-    const storedUser = localStorage.getItem('elevato_user');
+    const storedUser = localStorage.getItem('mwanzo_user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
     }
@@ -42,7 +42,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     if (email && password.length >= 6) {
       const loggedInUser = { ...mockUser, email };
       setUser(loggedInUser);
-      localStorage.setItem('elevato_user', JSON.stringify(loggedInUser));
+      localStorage.setItem('mwanzo_user', JSON.stringify(loggedInUser));
       return { success: true };
     }
     
@@ -59,12 +59,13 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         name,
         email,
         avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&background=0d9488&color=fff`,
+        role: 'student',
         enrolledCourses: [],
         completedCourses: [],
         certificates: [],
       };
       setUser(newUser);
-      localStorage.setItem('elevato_user', JSON.stringify(newUser));
+      localStorage.setItem('mwanzo_user', JSON.stringify(newUser));
       return { success: true };
     }
     
@@ -73,7 +74,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem('elevato_user');
+    localStorage.removeItem('mwanzo_user');
   };
 
   const enrollInCourse = (courseId: string) => {
@@ -83,7 +84,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         enrolledCourses: [...user.enrolledCourses, courseId],
       };
       setUser(updatedUser);
-      localStorage.setItem('elevato_user', JSON.stringify(updatedUser));
+      localStorage.setItem('mwanzo_user', JSON.stringify(updatedUser));
       
       // Initialize progress
       const course = courses.find(c => c.id === courseId);
@@ -102,7 +103,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         certificates: [...user.certificates, courseId],
       };
       setUser(updatedUser);
-      localStorage.setItem('elevato_user', JSON.stringify(updatedUser));
+      localStorage.setItem('mwanzo_user', JSON.stringify(updatedUser));
     }
   };
 

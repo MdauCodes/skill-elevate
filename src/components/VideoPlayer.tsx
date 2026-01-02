@@ -139,7 +139,7 @@ export function VideoPlayer({ src, poster, title, onComplete }: VideoPlayerProps
 
       {/* Watermark */}
       <div className="absolute bottom-16 right-4 text-foreground/30 text-sm font-medium pointer-events-none">
-        Elevato Kenya
+        Mwanzo Kenya
       </div>
 
       {/* Loading overlay */}

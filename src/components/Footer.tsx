@@ -10,10 +10,16 @@ const footerLinks = {
     { name: 'Job Board', href: '/jobs' },
   ],
   forTutors: [
-    { name: 'Teach on Elevato', href: '/become-tutor' },
+    { name: 'Teach on Mwanzo', href: '/become-tutor' },
     { name: 'Tutor Resources', href: '/tutor-resources' },
     { name: 'Earnings', href: '/tutor-earnings' },
     { name: 'Support', href: '/support' },
+  ],
+  forBusiness: [
+    { name: 'Post a Job', href: '/business/post-job' },
+    { name: 'Business Dashboard', href: '/business' },
+    { name: 'Find Talent', href: '/jobs' },
+    { name: 'Enterprise', href: '/enterprise' },
   ],
   company: [
     { name: 'About Us', href: '/about' },
@@ -46,15 +52,15 @@ export function Footer() {
           <div className="col-span-2 md:col-span-3 lg:col-span-2">
             <Logo size="md" className="mb-4" />
             <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-sm">
-              Elevato connects ambitious Kenyans with in-demand skills and verified job opportunities. 
-              Learn, grow, and land your dream job.
+              Mwanzo connects ambitious Kenyans with in-demand skills and verified job opportunities. 
+              Your journey to success starts here.
             </p>
             
             {/* Contact Info */}
             <div className="space-y-3 text-sm">
-              <a href="mailto:hello@elevato.co.ke" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+              <a href="mailto:hello@mwanzo.co.ke" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
                 <Mail className="w-4 h-4" />
-                hello@elevato.co.ke
+                hello@mwanzo.co.ke
               </a>
               <a href="tel:+254700000000" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
                 <Phone className="w-4 h-4" />
@@ -136,7 +142,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Elevato Kenya. All rights reserved.
+            © {new Date().getFullYear()} Mwanzo Kenya. All rights reserved.
           </p>
           
           {/* Social Links */}

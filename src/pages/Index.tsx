@@ -258,37 +258,40 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Featured Courses Carousel */}
-      <section className="py-12 sm:py-16 md:py-20">
+      {/* Featured Courses - 3D Carousel */}
+      <section className="py-10 sm:py-14 md:py-16 overflow-hidden">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-10">
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
             <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Trending Courses</h2>
-              <p className="text-muted-foreground mt-1 sm:mt-2 text-sm sm:text-base">Master the skills employers are actively hiring for</p>
+              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Trending Courses</h2>
+              <p className="text-muted-foreground mt-1 text-sm">Master skills employers are hiring for</p>
             </div>
-            <Button variant="ghost" asChild className="hidden md:flex">
+            <Button variant="ghost" asChild size="sm" className="hidden md:flex">
               <Link to="/courses">
                 View All
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
             </Button>
           </div>
         </div>
 
-        {/* Auto-scrolling carousel */}
-        <AutoScrollCarousel className="px-4">
+        {/* Smooth auto-scrolling carousel with pause on hover */}
+        <AutoScrollCarousel className="px-4" speed={25} pauseOnHover={true}>
           {featuredCourses.map((course) => (
-            <div key={course.id} className="flex-shrink-0 w-[280px] sm:w-[320px] md:w-[340px]">
+            <div 
+              key={course.id} 
+              className="flex-shrink-0 w-[260px] sm:w-[300px] md:w-[320px] transition-transform duration-300 ease-in-out hover:scale-[1.02]"
+            >
               <CourseCard course={course} />
             </div>
           ))}
         </AutoScrollCarousel>
 
-        <div className="container mx-auto px-4 mt-6 md:hidden">
-          <Button variant="outline" asChild className="w-full">
+        <div className="container mx-auto px-4 mt-4 md:hidden">
+          <Button variant="outline" asChild size="sm" className="w-full">
             <Link to="/courses">
               View All Courses
-              <ArrowRight className="w-4 h-4 ml-2" />
+              <ArrowRight className="w-4 h-4 ml-1" />
             </Link>
           </Button>
         </div>

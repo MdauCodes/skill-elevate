@@ -73,44 +73,42 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Hero Section - Humanized with Transitioning Success Stories */}
-      <section className="relative pt-16 sm:pt-20 md:pt-24 pb-10 md:pb-14 overflow-hidden">
+      {/* Hero Section - Compact with Side-by-Side Layout */}
+      <section className="relative pt-14 sm:pt-16 md:pt-20 pb-6 sm:pb-8 overflow-hidden">
         {/* Background effects */}
         <div className="absolute inset-0 bg-gradient-hero" />
-        <div className="absolute top-1/4 left-1/4 w-[250px] md:w-[400px] h-[250px] md:h-[400px] bg-gradient-glow opacity-30" />
-        <div className="absolute bottom-1/4 right-1/4 w-[150px] md:w-[300px] h-[150px] md:h-[300px] bg-gradient-glow opacity-15" />
+        <div className="absolute top-1/4 left-1/4 w-[200px] md:w-[300px] h-[200px] md:h-[300px] bg-gradient-glow opacity-20" />
         
         <div className="container mx-auto px-4 relative">
-          <div className="grid lg:grid-cols-2 gap-6 lg:gap-10 items-center">
-            {/* Left: Content */}
-            <div className="text-center lg:text-left order-2 lg:order-1">
+          {/* Main Hero Grid - Side by Side on Large Screens */}
+          <div className="grid lg:grid-cols-5 gap-4 lg:gap-6 items-center">
+            {/* Left: CTA Content - Takes more space */}
+            <div className="lg:col-span-3 text-center lg:text-left">
               {/* Trust Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-3 sm:mb-4 animate-fade-up">
-                <Verified className="w-4 h-4 text-primary" />
-                <span className="text-xs sm:text-sm text-primary font-medium">15,000+ Kenyans Trained</span>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-2 sm:mb-3 animate-fade-up">
+                <Verified className="w-3.5 h-3.5 text-primary" />
+                <span className="text-xs text-primary font-medium">15,000+ Kenyans Trained</span>
               </div>
 
-              {/* Main Headline - Genuine & Aspirational */}
-              <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-bold leading-tight animate-fade-up delay-100">
-                Learn Skills.
-                <br />
-                <span className="text-gradient">Get Hired.</span>
+              {/* Main Headline */}
+              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight animate-fade-up delay-100">
+                Learn Skills. <span className="text-gradient">Get Hired.</span>
               </h1>
 
-              {/* Simple Value Prop - Targeting all audiences */}
-              <p className="text-sm sm:text-base md:text-lg text-muted-foreground mt-3 sm:mt-4 max-w-lg mx-auto lg:mx-0 animate-fade-up delay-200">
-                Whether you're a form four leaver, job seeker, or looking to upskill — learn digital skills and land jobs at growing Kenyan companies.
+              {/* Value Prop */}
+              <p className="text-sm sm:text-base text-muted-foreground mt-2 sm:mt-3 max-w-md mx-auto lg:mx-0 animate-fade-up delay-200">
+                For job seekers, form four leavers, and ambitious Kenyans ready to upskill and land jobs at growing companies.
               </p>
 
-              {/* CTAs - Mobile Optimized */}
-              <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-2.5 sm:gap-3 mt-5 sm:mt-6 animate-fade-up delay-300">
-                <Button asChild size="lg" className="btn-primary w-full sm:w-auto text-sm sm:text-base px-5 sm:px-6 py-4 sm:py-5 shadow-glow">
+              {/* CTAs */}
+              <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-2 sm:gap-3 mt-4 animate-fade-up delay-300">
+                <Button asChild size="default" className="btn-primary w-full sm:w-auto text-sm px-5 py-3 shadow-glow">
                   <Link to="/courses">
                     Start Learning Free
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="w-full sm:w-auto text-sm sm:text-base px-5 sm:px-6 py-4 sm:py-5 border-border hover:bg-muted">
+                <Button asChild variant="outline" size="default" className="w-full sm:w-auto text-sm px-5 py-3 border-border hover:bg-muted">
                   <Link to="/jobs">
                     <Briefcase className="w-4 h-4 mr-2" />
                     Browse Jobs
@@ -118,35 +116,33 @@ const Index = () => {
                 </Button>
               </div>
 
-              {/* Quick Stats */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 mt-5 sm:mt-6 animate-fade-up delay-400">
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-xs sm:text-sm text-muted-foreground">M-Pesa Payments</span>
+              {/* Quick Stats - Inline */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-5 mt-3 sm:mt-4 animate-fade-up delay-400">
+                <div className="flex items-center gap-1">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary" />
+                  <span className="text-xs text-muted-foreground">M-Pesa</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-xs sm:text-sm text-muted-foreground">Lifetime Access</span>
+                <div className="flex items-center gap-1">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary" />
+                  <span className="text-xs text-muted-foreground">Lifetime Access</span>
                 </div>
-                <div className="flex items-center gap-1.5">
-                  <CheckCircle className="w-4 h-4 text-primary" />
-                  <span className="text-xs sm:text-sm text-muted-foreground">Job Placement</span>
+                <div className="flex items-center gap-1">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary" />
+                  <span className="text-xs text-muted-foreground">Job Placement</span>
                 </div>
               </div>
             </div>
 
-            {/* Right: Success Story Images with Transitions */}
-            <div className="relative order-1 lg:order-2 animate-fade-up delay-200">
-              <div className="relative mx-auto max-w-sm lg:max-w-md">
-                {/* Main Featured Image - Carousel with smooth transitions */}
-                <div className="relative rounded-xl sm:rounded-2xl overflow-hidden shadow-xl border border-border/30 h-[220px] sm:h-[260px] md:h-[300px]">
+            {/* Right: Success Story Images - Compact Carousel */}
+            <div className="lg:col-span-2 relative animate-fade-up delay-200">
+              <div className="relative mx-auto max-w-xs lg:max-w-sm">
+                {/* Main Featured Image */}
+                <div className="relative rounded-xl overflow-hidden shadow-lg border border-border/30 h-[160px] sm:h-[180px] lg:h-[200px]">
                   {heroStories.map((story, index) => (
                     <div
                       key={index}
                       className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                        index === activeStory 
-                          ? 'opacity-100 scale-100' 
-                          : 'opacity-0 scale-105'
+                        index === activeStory ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
                       }`}
                     >
                       <img 
@@ -154,16 +150,16 @@ const Index = () => {
                         alt={`${story.name} - Mwanzo Skills Campus success story`}
                         className="w-full h-full object-cover"
                       />
-                      {/* Success Story Overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/95 via-background/60 to-transparent p-3 sm:p-4">
+                      {/* Overlay */}
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent p-2.5 sm:p-3">
                         <div className="flex items-center gap-2">
-                          <div className="flex-1">
-                            <p className="text-xs sm:text-sm font-semibold text-foreground">{story.quote}</p>
-                            <p className="text-xs text-muted-foreground mt-0.5">{story.name} — {story.role}</p>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-xs font-semibold text-foreground truncate">{story.quote}</p>
+                            <p className="text-[10px] text-muted-foreground truncate">{story.name} — {story.role}</p>
                           </div>
-                          <div className="flex gap-0.5">
+                          <div className="flex gap-0.5 shrink-0">
                             {[...Array(5)].map((_, i) => (
-                              <Star key={i} className="w-2.5 h-2.5 sm:w-3 sm:h-3 fill-primary text-primary" />
+                              <Star key={i} className="w-2 h-2 fill-primary text-primary" />
                             ))}
                           </div>
                         </div>
@@ -172,15 +168,13 @@ const Index = () => {
                   ))}
 
                   {/* Story Indicators */}
-                  <div className="absolute bottom-14 sm:bottom-16 left-1/2 -translate-x-1/2 flex gap-1.5">
+                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-1">
                     {heroStories.map((_, index) => (
                       <button
                         key={index}
                         onClick={() => setActiveStory(index)}
-                        className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full transition-all duration-300 ${
-                          index === activeStory 
-                            ? 'bg-primary w-4 sm:w-6' 
-                            : 'bg-foreground/30 hover:bg-foreground/50'
+                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ease-in-out ${
+                          index === activeStory ? 'bg-primary w-4' : 'bg-foreground/30 hover:bg-foreground/50'
                         }`}
                         aria-label={`View story ${index + 1}`}
                       />
@@ -188,79 +182,41 @@ const Index = () => {
                   </div>
                 </div>
 
-                {/* Floating Mini Cards - Compact */}
-                <div className="hidden md:block absolute -left-6 lg:-left-10 top-1/3 transform -translate-y-1/2">
-                  <div className="bg-card/95 backdrop-blur-sm border border-border rounded-lg p-2.5 shadow-lg animate-float">
-                    <div className="flex items-center gap-2">
-                      <img 
-                        src={heroWorker1} 
-                        alt="Success story" 
-                        className="w-10 h-10 rounded-md object-cover"
-                      />
-                      <div>
-                        <p className="text-xs font-medium text-foreground">Brian K.</p>
-                        <p className="text-xs text-primary">Just got hired! 🎉</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="hidden md:block absolute -right-4 lg:-right-8 bottom-1/3">
-                  <div className="bg-card/95 backdrop-blur-sm border border-border rounded-lg p-2.5 shadow-lg animate-float" style={{ animationDelay: '1.5s' }}>
-                    <div className="flex items-center gap-2">
-                      <img 
-                        src={heroLearner2} 
-                        alt="Success story" 
-                        className="w-10 h-10 rounded-md object-cover"
-                      />
-                      <div>
-                        <p className="text-xs font-medium text-foreground">Amina O.</p>
-                        <p className="text-xs text-primary">3 job offers! 🏆</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Live Counter Badge - Compact */}
-                <div className="absolute -top-2 sm:-top-3 right-2 sm:right-4 bg-primary text-primary-foreground px-2.5 py-1 sm:px-3 sm:py-1.5 rounded-full text-xs font-medium shadow-md animate-pulse">
+                {/* Live Counter Badge */}
+                <div className="absolute -top-2 right-2 bg-primary text-primary-foreground px-2 py-0.5 rounded-full text-[10px] font-medium shadow-md animate-pulse">
                   <span className="flex items-center gap-1">
-                    <span className="w-1.5 h-1.5 bg-primary-foreground rounded-full animate-ping" />
+                    <span className="w-1 h-1 bg-primary-foreground rounded-full animate-ping" />
                     127 learning now
                   </span>
                 </div>
               </div>
 
-              {/* Mobile Success Stories Row - Compact */}
-              <div className="flex gap-2 mt-3 md:hidden justify-center">
-                {heroStories.slice(0, 2).map((story, index) => (
+              {/* Mini Thumbnails - Desktop Only */}
+              <div className="hidden lg:flex gap-2 mt-2 justify-center">
+                {heroStories.map((story, index) => (
                   <button
                     key={index}
                     onClick={() => setActiveStory(index)}
-                    className={`bg-card border rounded-lg p-2 shadow flex items-center gap-2 transition-all duration-300 ${
-                      index === activeStory ? 'border-primary' : 'border-border'
+                    className={`relative rounded-lg overflow-hidden w-12 h-12 transition-all duration-300 ease-in-out ${
+                      index === activeStory ? 'ring-2 ring-primary scale-105' : 'opacity-60 hover:opacity-100'
                     }`}
                   >
-                    <img src={story.image} alt={story.name} className="w-8 h-8 rounded object-cover" />
-                    <div className="text-left">
-                      <p className="text-xs font-medium">{story.name.split(' ')[0]}</p>
-                      <p className="text-xs text-primary">Hired! 🎉</p>
-                    </div>
+                    <img src={story.image} alt={story.name} className="w-full h-full object-cover" />
                   </button>
                 ))}
               </div>
             </div>
           </div>
 
-          {/* Companies Hiring - Smaller SMEs */}
-          <div className="mt-8 sm:mt-10 pt-6 sm:pt-8 border-t border-border/30 text-center animate-fade-up delay-500">
-            <p className="text-xs text-muted-foreground mb-3 sm:mb-4">Our graduates work at growing Kenyan companies:</p>
-            <div className="flex flex-wrap items-center justify-center gap-4 sm:gap-8 opacity-70">
-              <span className="text-xs sm:text-sm font-semibold text-foreground/70">Copia Kenya</span>
-              <span className="text-xs sm:text-sm font-semibold text-foreground/70">Twiga Foods</span>
-              <span className="text-xs sm:text-sm font-semibold text-foreground/70">Sendy</span>
-              <span className="text-xs sm:text-sm font-semibold text-foreground/70">Ajira Digital</span>
-              <span className="text-xs sm:text-sm font-semibold text-foreground/70">Moringa School</span>
-              <span className="text-xs sm:text-sm font-semibold text-foreground/70">iPay Africa</span>
+          {/* Companies Hiring - Compact */}
+          <div className="mt-6 pt-4 border-t border-border/30 text-center animate-fade-up delay-500">
+            <p className="text-[10px] text-muted-foreground mb-2">Graduates hired at growing Kenyan SMEs:</p>
+            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 opacity-60">
+              <span className="text-xs font-medium text-foreground/70">Copia</span>
+              <span className="text-xs font-medium text-foreground/70">Twiga Foods</span>
+              <span className="text-xs font-medium text-foreground/70">Sendy</span>
+              <span className="text-xs font-medium text-foreground/70">Ajira Digital</span>
+              <span className="text-xs font-medium text-foreground/70">iPay</span>
             </div>
           </div>
         </div>

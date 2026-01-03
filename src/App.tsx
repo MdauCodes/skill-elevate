@@ -19,6 +19,7 @@ import BusinessRegister from "./pages/BusinessRegister";
 import BusinessDashboard from "./pages/BusinessDashboard";
 import PostJob from "./pages/PostJob";
 import ViewApplicants from "./pages/ViewApplicants";
+import TutorDetail from "./pages/TutorDetail";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,7 +47,7 @@ const App = () => (
             <Route path="/business/post-job" element={<PostJob />} />
             <Route path="/business/jobs/:jobId/applicants" element={<ViewApplicants />} />
             <Route path="/tutors" element={<Courses />} />
-            <Route path="/tutors/:id" element={<Courses />} />
+            <Route path="/tutors/:id" element={<TutorDetail />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

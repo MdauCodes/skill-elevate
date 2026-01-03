@@ -18,6 +18,7 @@ export interface Course {
   level: 'Beginner' | 'Intermediate' | 'Advanced';
   thumbnail: string;
   previewVideo: string;
+  youtubePreviewId?: string;
   isTrending?: boolean;
   isFeatured?: boolean;
   lastUpdated: string;
@@ -37,7 +38,7 @@ export interface Lesson {
   duration: string;
   isPreview: boolean;
   videoUrl?: string;
-  youtubeId?: string; // For YouTube embeds
+  youtubeId?: string;
 }
 
 export interface Tutor {
@@ -49,6 +50,8 @@ export interface Tutor {
   rating: number;
   studentCount: number;
   courseCount: number;
+  specialties: string[];
+  experience: string;
   socialLinks?: {
     twitter?: string;
     linkedin?: string;
@@ -171,51 +174,59 @@ export const categories: Category[] = [
   },
 ];
 
-// Tutors
+// Tutors with Kenyan-focused profiles
 export const tutors: Tutor[] = [
   {
     id: 'tutor-1',
     name: 'Janet Wanjiku',
-    avatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=200&h=200&fit=crop&crop=face',
     title: 'Digital Marketing Expert',
-    bio: 'Former Head of Marketing at Safaricom with 10+ years of experience in digital strategy, SEO, and performance marketing across East Africa.',
+    bio: 'Former Head of Marketing at Safaricom with 10+ years of experience in digital strategy, SEO, and performance marketing across East Africa. I have helped over 200 Kenyan businesses grow their online presence.',
     rating: 4.9,
     studentCount: 12500,
     courseCount: 8,
+    specialties: ['SEO', 'Google Ads', 'Social Media Marketing', 'Content Strategy'],
+    experience: '10+ years in Digital Marketing',
   },
   {
     id: 'tutor-2',
     name: 'Dr. Samuel Ochieng',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=200&h=200&fit=crop&crop=face',
     title: 'AI Research Scientist',
-    bio: 'PhD in Machine Learning from MIT, currently leading AI initiatives at IBM Research Africa. Passionate about bringing AI education to Kenya.',
+    bio: 'PhD in Machine Learning from MIT, currently leading AI initiatives at IBM Research Africa in Nairobi. Passionate about democratizing AI education across Kenya and making it accessible to everyone.',
     rating: 4.9,
     studentCount: 8900,
     courseCount: 5,
+    specialties: ['Machine Learning', 'ChatGPT', 'Python', 'Data Science'],
+    experience: '8+ years in AI Research',
   },
   {
     id: 'tutor-3',
     name: 'Mary Njeri',
-    avatar: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=200&h=200&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1523824921871-d6f1a15151f1?w=200&h=200&fit=crop&crop=face',
     title: 'Full Stack Developer',
-    bio: 'Senior Engineer at Microsoft with expertise in React, Node.js, and cloud architecture. Building the next generation of Kenyan developers.',
+    bio: 'Senior Engineer at Microsoft with expertise in React, Node.js, and cloud architecture. Building the next generation of Kenyan developers one student at a time. Started coding at Jomo Kenyatta University.',
     rating: 4.8,
     studentCount: 15600,
     courseCount: 12,
+    specialties: ['React', 'Node.js', 'TypeScript', 'Cloud Architecture'],
+    experience: '7+ years in Software Development',
   },
   {
     id: 'tutor-4',
     name: 'David Kamau',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1507152927220-f21f4c1e2c3e?w=200&h=200&fit=crop&crop=face',
     title: 'Creative Director',
-    bio: 'Award-winning creative director with clients including Coca-Cola Africa and Kenya Airways. Founder of Nairobi Design Studio.',
+    bio: 'Award-winning creative director with clients including Coca-Cola Africa and Kenya Airways. Founder of Nairobi Design Studio. I believe every Kenyan has creative potential waiting to be unlocked.',
     rating: 4.7,
     studentCount: 6700,
     courseCount: 6,
+    specialties: ['Figma', 'Adobe Suite', 'Brand Design', 'UI/UX'],
+    experience: '12+ years in Design',
   },
 ];
 
-// Courses with YouTube video IDs for real educational content
+// Courses with category-relevant YouTube preview videos
 export const courses: Course[] = [
   {
     id: 'course-1',
@@ -233,8 +244,9 @@ export const courses: Course[] = [
     duration: '12.5 hours',
     lessonsCount: 45,
     level: 'Beginner',
-    thumbnail: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=450&fit=crop',
+    thumbnail: 'https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&h=450&fit=crop',
     previewVideo: 'https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4',
+    youtubePreviewId: 'bixR-KIJKYM',
     isTrending: true,
     isFeatured: true,
     lastUpdated: 'December 2024',
@@ -256,7 +268,7 @@ export const courses: Course[] = [
         title: 'Introduction to Digital Marketing',
         lessons: [
           { id: 'l1', title: 'Welcome & Course Overview', duration: '5:30', isPreview: true, youtubeId: 'bixR-KIJKYM' },
-          { id: 'l2', title: 'The Digital Marketing Landscape in Kenya', duration: '12:45', isPreview: true },
+          { id: 'l2', title: 'The Digital Marketing Landscape in Kenya', duration: '12:45', isPreview: true, youtubeId: 'nU-IIXBWlS4' },
           { id: 'l3', title: 'Setting Up Your Marketing Toolkit', duration: '18:20', isPreview: false, youtubeId: '8aGhZQkoFbQ' },
         ],
       },
@@ -298,6 +310,7 @@ export const courses: Course[] = [
     level: 'Intermediate',
     thumbnail: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop',
     previewVideo: 'https://cdn.pixabay.com/video/2019/06/19/24569-343001767_large.mp4',
+    youtubePreviewId: 'ad79nYk2keg',
     isTrending: true,
     isFeatured: true,
     lastUpdated: 'December 2024',
@@ -351,6 +364,7 @@ export const courses: Course[] = [
     level: 'Beginner',
     thumbnail: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=450&fit=crop',
     previewVideo: 'https://cdn.pixabay.com/video/2020/02/12/32489-392015291_large.mp4',
+    youtubePreviewId: 'UB1O30fR-EE',
     isTrending: true,
     isFeatured: true,
     lastUpdated: 'December 2024',
@@ -412,6 +426,7 @@ export const courses: Course[] = [
     level: 'Beginner',
     thumbnail: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=450&fit=crop',
     previewVideo: 'https://cdn.pixabay.com/video/2020/07/30/45603-445912296_large.mp4',
+    youtubePreviewId: 'I2pwcAVonKI',
     isFeatured: true,
     lastUpdated: 'November 2024',
     whatYouLearn: [
@@ -464,6 +479,7 @@ export const courses: Course[] = [
     level: 'Beginner',
     thumbnail: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&h=450&fit=crop',
     previewVideo: 'https://cdn.pixabay.com/video/2021/04/06/69893-533515618_large.mp4',
+    youtubePreviewId: 'YqQx75OPRa0',
     isFeatured: true,
     lastUpdated: 'November 2024',
     whatYouLearn: [
@@ -515,6 +531,7 @@ export const courses: Course[] = [
     level: 'Beginner',
     thumbnail: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=450&fit=crop',
     previewVideo: 'https://cdn.pixabay.com/video/2016/09/21/5106-183629262_large.mp4',
+    youtubePreviewId: 'LKnqECcg6Gw',
     lastUpdated: 'October 2024',
     whatYouLearn: [
       'Professional video shooting techniques',
@@ -565,6 +582,7 @@ export const courses: Course[] = [
     level: 'Beginner',
     thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop',
     previewVideo: 'https://cdn.pixabay.com/video/2020/08/12/46966-449626928_large.mp4',
+    youtubePreviewId: 'Vl0H-qTclOg',
     isFeatured: true,
     lastUpdated: 'December 2024',
     whatYouLearn: [
@@ -615,6 +633,7 @@ export const courses: Course[] = [
     level: 'Intermediate',
     thumbnail: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=450&fit=crop',
     previewVideo: 'https://cdn.pixabay.com/video/2020/03/21/33444-399959023_large.mp4',
+    youtubePreviewId: 'VPvVD8t02U8',
     isTrending: true,
     lastUpdated: 'December 2024',
     whatYouLearn: [
@@ -828,7 +847,7 @@ export const mockApplications: JobApplication[] = [
     jobId: 'job-1',
     applicantName: 'Grace Wanjiru',
     applicantEmail: 'grace.w@email.com',
-    applicantAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop',
+    applicantAvatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&h=100&fit=crop&crop=face',
     resumeUrl: '#',
     coverLetter: 'I am excited to apply for the Social Media Manager position. With my recent certification from Mwanzo in Social Media Management and 2 years of experience managing brand accounts, I am confident I can help TechHub Nairobi grow its digital presence...',
     appliedDate: '2 days ago',
@@ -840,7 +859,7 @@ export const mockApplications: JobApplication[] = [
     jobId: 'job-1',
     applicantName: 'David Kimani',
     applicantEmail: 'david.k@email.com',
-    applicantAvatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop',
+    applicantAvatar: 'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=100&h=100&fit=crop&crop=face',
     resumeUrl: '#',
     coverLetter: 'As a graduate of the Mwanzo Social Media Management course, I have developed strong skills in content creation and community engagement. I would love to bring my passion for tech and social media to TechHub Nairobi...',
     appliedDate: '1 day ago',
@@ -852,7 +871,7 @@ export const mockApplications: JobApplication[] = [
     jobId: 'job-2',
     applicantName: 'Peter Mwangi',
     applicantEmail: 'peter.m@email.com',
-    applicantAvatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop',
+    applicantAvatar: 'https://images.unsplash.com/photo-1507152927220-f21f4c1e2c3e?w=100&h=100&fit=crop&crop=face',
     resumeUrl: '#',
     coverLetter: 'I recently completed the Full Stack Web Development Bootcamp at Mwanzo and built several projects including an e-commerce platform. I am eager to apply my React and Node.js skills at Safaricom...',
     appliedDate: '3 days ago',
@@ -864,7 +883,7 @@ export const mockApplications: JobApplication[] = [
     jobId: 'job-3',
     applicantName: 'Sarah Odhiambo',
     applicantEmail: 'sarah.o@email.com',
-    applicantAvatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=100&h=100&fit=crop',
+    applicantAvatar: 'https://images.unsplash.com/photo-1589156280159-27698a70f29e?w=100&h=100&fit=crop&crop=face',
     resumeUrl: '#',
     coverLetter: 'With my Digital Marketing Masterclass certification and experience running campaigns for local businesses, I am well-prepared to help Kenya Airways enhance its digital marketing efforts...',
     appliedDate: '5 days ago',
@@ -873,12 +892,12 @@ export const mockApplications: JobApplication[] = [
   },
 ];
 
-// Testimonials
+// Testimonials with Kenyan-focused avatars
 export const testimonials: Testimonial[] = [
   {
     id: 'testimonial-1',
     name: 'David Kimani',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=200&h=200&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1506277886164-e25aa3f4ef7f?w=200&h=200&fit=crop&crop=face',
     jobTitle: 'Web Developer',
     company: 'Microsoft Kenya',
     courseCompleted: 'Full Stack Web Development Bootcamp',
@@ -888,7 +907,7 @@ export const testimonials: Testimonial[] = [
   {
     id: 'testimonial-2',
     name: 'Grace Wanjiru',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200&h=200&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=200&h=200&fit=crop&crop=face',
     jobTitle: 'Social Media Manager',
     company: 'Equity Bank',
     courseCompleted: 'Social Media Management for Kenyan Brands',
@@ -898,12 +917,52 @@ export const testimonials: Testimonial[] = [
   {
     id: 'testimonial-3',
     name: 'Peter Ochieng',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=200&h=200&fit=crop',
+    avatar: 'https://images.unsplash.com/photo-1507152927220-f21f4c1e2c3e?w=200&h=200&fit=crop&crop=face',
     jobTitle: 'AI Consultant',
     company: 'Deloitte Kenya',
     courseCompleted: 'AI & Machine Learning for Business',
     quote: 'The AI course gave me the confidence to transition into consulting. Now I help Kenyan businesses implement AI solutions. Mwanzo truly changed my career trajectory.',
     rating: 5,
+  },
+];
+
+// Tutor reviews
+export const tutorReviews = [
+  {
+    id: 'tr-1',
+    tutorId: 'tutor-1',
+    userName: 'Michael Otieno',
+    userAvatar: 'https://ui-avatars.com/api/?name=MO&background=0d9488&color=fff',
+    rating: 5,
+    comment: 'Janet is an exceptional instructor. Her real-world experience at Safaricom really shows in her teaching. She explains complex marketing concepts in simple terms.',
+    date: '1 week ago',
+  },
+  {
+    id: 'tr-2',
+    tutorId: 'tutor-1',
+    userName: 'Faith Njoroge',
+    userAvatar: 'https://ui-avatars.com/api/?name=FN&background=0d9488&color=fff',
+    rating: 5,
+    comment: 'I tripled my business sales after taking Janet\'s digital marketing course. She genuinely cares about her students success.',
+    date: '2 weeks ago',
+  },
+  {
+    id: 'tr-3',
+    tutorId: 'tutor-2',
+    userName: 'Brian Kamau',
+    userAvatar: 'https://ui-avatars.com/api/?name=BK&background=0d9488&color=fff',
+    rating: 5,
+    comment: 'Dr. Ochieng makes AI accessible to everyone. I never thought I could understand machine learning, but his teaching made it click.',
+    date: '3 days ago',
+  },
+  {
+    id: 'tr-4',
+    tutorId: 'tutor-3',
+    userName: 'Anne Wambui',
+    userAvatar: 'https://ui-avatars.com/api/?name=AW&background=0d9488&color=fff',
+    rating: 5,
+    comment: 'Mary is patient and thorough. The projects in her web development course prepared me for real job interviews. Now I work at a top tech company!',
+    date: '1 month ago',
   },
 ];
 

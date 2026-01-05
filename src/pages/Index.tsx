@@ -1,391 +1,257 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle, BookOpen, Briefcase, Award, Users, Play, Verified, GraduationCap, Star } from 'lucide-react';
-import heroLearner1 from '@/assets/hero-learner-1.jpg';
-import heroWorker1 from '@/assets/hero-worker-1.jpg';
-import heroLearner2 from '@/assets/hero-learner-2.jpg';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Search, ArrowRight, BookOpen, Briefcase, Award, Star, Users, CheckCircle, TrendingUp, GraduationCap, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CourseCard } from '@/components/CourseCard';
-import { CategoryCard } from '@/components/CategoryCard';
 import { TestimonialCard } from '@/components/TestimonialCard';
 import { JobCard } from '@/components/JobCard';
 import { TutorCard } from '@/components/TutorCard';
-import { StatsSection } from '@/components/StatsSection';
-import { AutoScrollCarousel } from '@/components/AutoScrollCarousel';
 import { courses, categories, testimonials, jobs, tutors } from '@/data/mockData';
 
+// Category tabs for filtering
+const categoryTabs = ['All', 'Web Development', 'Digital Marketing', 'AI & Machine Learning', 'Graphic Design', 'Business'];
+
+// How it works steps
 const howItWorks = [
   {
     icon: BookOpen,
     title: 'Learn a Skill',
-    description: 'Enroll in industry-relevant courses taught by experienced Kenyan professionals. Learn at your own pace with video lessons.',
+    description: 'Enroll in courses taught by experienced Kenyan professionals',
   },
   {
     icon: Award,
     title: 'Get Certified',
-    description: 'Complete your course and earn a certificate recognized by top employers across Kenya and East Africa.',
+    description: 'Earn certificates recognized by top employers across Kenya',
   },
   {
     icon: Briefcase,
     title: 'Get a Job',
-    description: 'Access exclusive job opportunities matched to your new skills. We connect you directly with hiring companies.',
-  },
-];
-
-// Hero success stories for carousel
-const heroStories = [
-  {
-    image: heroLearner1,
-    name: 'Wanjiku M.',
-    quote: '"I learned from home and got hired!"',
-    role: 'Now a UX Designer at Copia Kenya',
-  },
-  {
-    image: heroWorker1,
-    name: 'Brian K.',
-    quote: '"From Form 4 to full-time developer!"',
-    role: 'Now a Software Dev at Twiga Foods',
-  },
-  {
-    image: heroLearner2,
-    name: 'Amina O.',
-    quote: '"3 job offers after completing my course!"',
-    role: 'Now a Data Analyst at Sendy',
+    description: 'Access exclusive job opportunities matched to your new skills',
   },
 ];
 
 const Index = () => {
-  const featuredCourses = courses.filter(c => c.isFeatured).slice(0, 8);
-  const featuredJobs = jobs.slice(0, 3);
-  const [activeStory, setActiveStory] = useState(0);
+  const [activeCategory, setActiveCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
-  // Auto-rotate hero stories
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveStory((prev) => (prev + 1) % heroStories.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, []);
+  // Filter courses based on category
+  const filteredCourses = activeCategory === 'All' 
+    ? courses.slice(0, 8)
+    : courses.filter(c => c.category.name === activeCategory || c.category.name.includes(activeCategory.split(' ')[0])).slice(0, 8);
+
+  const displayedCourses = filteredCourses.length > 0 ? filteredCourses : courses.slice(0, 8);
+  const featuredJobs = jobs.slice(0, 4);
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/courses?search=${encodeURIComponent(searchQuery)}`);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* Hero Section - Compact with Side-by-Side Layout */}
-      <section className="relative pt-14 sm:pt-16 md:pt-20 pb-6 sm:pb-8 overflow-hidden">
-        {/* Background effects */}
-        <div className="absolute inset-0 bg-gradient-hero" />
-        <div className="absolute top-1/4 left-1/4 w-[200px] md:w-[300px] h-[200px] md:h-[300px] bg-gradient-glow opacity-20" />
-        
-        <div className="container mx-auto px-4 relative">
-          {/* Main Hero Grid - Side by Side on Large Screens */}
-          <div className="grid lg:grid-cols-5 gap-4 lg:gap-6 items-center">
-            {/* Left: CTA Content - Takes more space */}
-            <div className="lg:col-span-3 text-center lg:text-left">
-              {/* Trust Badge */}
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mb-2 sm:mb-3 animate-fade-up">
-                <Verified className="w-3.5 h-3.5 text-primary" />
-                <span className="text-xs text-primary font-medium">15,000+ Kenyans Trained</span>
-              </div>
+      {/* 1. Hero Section - Clean with prominent search */}
+      <section className="bg-gradient-hero border-b border-border">
+        <div className="container mx-auto px-4 py-10 md:py-14">
+          <div className="max-w-3xl mx-auto text-center">
+            {/* Main Headline */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight">
+              Learn In-Demand Skills.{' '}
+              <span className="text-primary">Get Hired in Kenya.</span>
+            </h1>
 
-              {/* Main Headline */}
-              <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-tight animate-fade-up delay-100">
-                Learn Skills. <span className="text-gradient">Get Hired.</span>
-              </h1>
+            <p className="text-muted-foreground mt-4 text-base md:text-lg max-w-xl mx-auto">
+              Join 15,000+ Kenyans learning practical skills and landing jobs at top companies.
+            </p>
 
-              {/* Value Prop */}
-              <p className="text-sm sm:text-base text-muted-foreground mt-2 sm:mt-3 max-w-md mx-auto lg:mx-0 animate-fade-up delay-200">
-                For job seekers, form four leavers, and ambitious Kenyans ready to upskill and land jobs at growing companies.
-              </p>
-
-              {/* CTAs */}
-              <div className="flex flex-col sm:flex-row items-center lg:items-start justify-center lg:justify-start gap-2 sm:gap-3 mt-4 animate-fade-up delay-300">
-                <Button asChild size="default" className="btn-primary w-full sm:w-auto text-sm px-5 py-3 shadow-glow">
-                  <Link to="/courses">
-                    Start Learning Free
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-                <Button asChild variant="outline" size="default" className="w-full sm:w-auto text-sm px-5 py-3 border-border hover:bg-muted">
-                  <Link to="/jobs">
-                    <Briefcase className="w-4 h-4 mr-2" />
-                    Browse Jobs
-                  </Link>
+            {/* Search Bar */}
+            <form onSubmit={handleSearch} className="mt-6 md:mt-8">
+              <div className="relative max-w-xl mx-auto">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="What do you want to learn?"
+                  className="w-full pl-12 pr-32 py-4 bg-background border border-border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary shadow-sm"
+                />
+                <Button type="submit" className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90">
+                  Search
                 </Button>
               </div>
+            </form>
 
-              {/* Quick Stats - Inline */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-3 sm:gap-5 mt-3 sm:mt-4 animate-fade-up delay-400">
-                <div className="flex items-center gap-1">
-                  <CheckCircle className="w-3.5 h-3.5 text-primary" />
-                  <span className="text-xs text-muted-foreground">M-Pesa</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <CheckCircle className="w-3.5 h-3.5 text-primary" />
-                  <span className="text-xs text-muted-foreground">Lifetime Access</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <CheckCircle className="w-3.5 h-3.5 text-primary" />
-                  <span className="text-xs text-muted-foreground">Job Placement</span>
-                </div>
-              </div>
+            {/* Quick Category Pills */}
+            <div className="flex flex-wrap items-center justify-center gap-2 mt-6">
+              {categories.slice(0, 5).map((cat) => (
+                <Link 
+                  key={cat.id}
+                  to={`/courses?category=${cat.slug}`}
+                  className="category-pill text-xs md:text-sm"
+                >
+                  {cat.name}
+                </Link>
+              ))}
             </div>
 
-            {/* Right: Success Story Images - Compact Carousel */}
-            <div className="lg:col-span-2 relative animate-fade-up delay-200">
-              <div className="relative mx-auto max-w-xs lg:max-w-sm">
-                {/* Main Featured Image */}
-                <div className="relative rounded-xl overflow-hidden shadow-lg border border-border/30 h-[160px] sm:h-[180px] lg:h-[200px]">
-                  {heroStories.map((story, index) => (
-                    <div
-                      key={index}
-                      className={`absolute inset-0 transition-all duration-700 ease-in-out ${
-                        index === activeStory ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-                      }`}
-                    >
-                      <img 
-                        src={story.image} 
-                        alt={`${story.name} - Mwanzo Skills Campus success story`}
-                        className="w-full h-full object-cover"
-                      />
-                      {/* Overlay */}
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background/95 via-background/50 to-transparent p-2.5 sm:p-3">
-                        <div className="flex items-center gap-2">
-                          <div className="flex-1 min-w-0">
-                            <p className="text-xs font-semibold text-foreground truncate">{story.quote}</p>
-                            <p className="text-[10px] text-muted-foreground truncate">{story.name} — {story.role}</p>
-                          </div>
-                          <div className="flex gap-0.5 shrink-0">
-                            {[...Array(5)].map((_, i) => (
-                              <Star key={i} className="w-2 h-2 fill-primary text-primary" />
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-
-                  {/* Story Indicators */}
-                  <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-1">
-                    {heroStories.map((_, index) => (
-                      <button
-                        key={index}
-                        onClick={() => setActiveStory(index)}
-                        className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ease-in-out ${
-                          index === activeStory ? 'bg-primary w-4' : 'bg-foreground/30 hover:bg-foreground/50'
-                        }`}
-                        aria-label={`View story ${index + 1}`}
-                      />
-                    ))}
-                  </div>
-                </div>
-
-                {/* Live Counter Badge */}
-                <div className="absolute -top-2 right-2 bg-primary text-primary-foreground px-2 py-0.5 rounded-full text-[10px] font-medium shadow-md animate-pulse">
-                  <span className="flex items-center gap-1">
-                    <span className="w-1 h-1 bg-primary-foreground rounded-full animate-ping" />
-                    127 learning now
-                  </span>
-                </div>
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-8 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2">
+                <Users className="w-4 h-4 text-primary" />
+                <span>15,000+ students</span>
               </div>
-
-              {/* Mini Thumbnails - Desktop Only */}
-              <div className="hidden lg:flex gap-2 mt-2 justify-center">
-                {heroStories.map((story, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setActiveStory(index)}
-                    className={`relative rounded-lg overflow-hidden w-12 h-12 transition-all duration-300 ease-in-out ${
-                      index === activeStory ? 'ring-2 ring-primary scale-105' : 'opacity-60 hover:opacity-100'
-                    }`}
-                  >
-                    <img src={story.image} alt={story.name} className="w-full h-full object-cover" />
-                  </button>
-                ))}
+              <div className="flex items-center gap-2">
+                <Star className="w-4 h-4 text-warning fill-warning" />
+                <span>4.8 average rating</span>
               </div>
-            </div>
-          </div>
-
-          {/* Companies Hiring - Compact */}
-          <div className="mt-6 pt-4 border-t border-border/30 text-center animate-fade-up delay-500">
-            <p className="text-[10px] text-muted-foreground mb-2">Graduates hired at growing Kenyan SMEs:</p>
-            <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-6 opacity-60">
-              <span className="text-xs font-medium text-foreground/70">Copia</span>
-              <span className="text-xs font-medium text-foreground/70">Twiga Foods</span>
-              <span className="text-xs font-medium text-foreground/70">Sendy</span>
-              <span className="text-xs font-medium text-foreground/70">Ajira Digital</span>
-              <span className="text-xs font-medium text-foreground/70">iPay</span>
+              <div className="flex items-center gap-2">
+                <Briefcase className="w-4 h-4 text-success" />
+                <span>Job Placement Support</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Stats Section */}
-      <StatsSection />
-
-      {/* How It Works - Mobile First */}
-      <section id="how-it-works" className="py-12 sm:py-16 md:py-20 bg-card">
+      {/* 2. Featured/Popular Courses - IMMEDIATELY after hero */}
+      <section className="py-10 md:py-14">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-10 sm:mb-14">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">How Mwanzo Works</h2>
-            <p className="text-muted-foreground mt-2 text-sm sm:text-base max-w-xl mx-auto">
-              From learning to landing your dream job in three simple steps
-            </p>
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">Most Popular Courses</h2>
+            <Button variant="ghost" asChild className="hidden md:flex text-primary hover:text-primary/80">
+              <Link to="/courses">
+                View All Courses
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </Button>
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-5xl mx-auto">
-            {howItWorks.map((step, index) => (
-              <div 
-                key={step.title} 
-                className="relative text-center p-6 rounded-2xl bg-gradient-card border border-border animate-fade-up"
-                style={{ animationDelay: `${index * 150}ms` }}
+          {/* Category Tabs */}
+          <div className="flex gap-2 overflow-x-auto pb-4 mb-6 scrollbar-hide">
+            {categoryTabs.map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveCategory(tab)}
+                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+                  activeCategory === tab
+                    ? 'bg-foreground text-background'
+                    : 'bg-secondary text-foreground hover:bg-muted'
+                }`}
               >
-                {/* Step number */}
-                <div className="relative z-10 w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-primary/10 flex items-center justify-center mx-auto mb-4 sm:mb-6">
-                  <step.icon className="w-7 h-7 sm:w-8 sm:h-8 text-primary" />
-                  <span className="absolute -top-2 -right-2 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-primary text-primary-foreground text-xs sm:text-sm font-bold flex items-center justify-center">
-                    {index + 1}
-                  </span>
-                </div>
+                {tab}
+              </button>
+            ))}
+          </div>
 
-                <h3 className="text-lg sm:text-xl font-bold mb-2 sm:mb-3">{step.title}</h3>
-                <p className="text-sm sm:text-base text-muted-foreground">{step.description}</p>
+          {/* Courses Grid - 4 columns desktop, 2 tablet, 1 mobile */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {displayedCourses.map((course, index) => (
+              <div 
+                key={course.id} 
+                className="animate-fade-up"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <CourseCard course={course} />
               </div>
             ))}
           </div>
-        </div>
-      </section>
 
-      {/* Featured Courses - 3D Carousel */}
-      <section className="py-10 sm:py-14 md:py-16 overflow-hidden">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-6">
-            <div>
-              <h2 className="text-xl sm:text-2xl md:text-3xl font-bold">Trending Courses</h2>
-              <p className="text-muted-foreground mt-1 text-sm">Master skills employers are hiring for</p>
-            </div>
-            <Button variant="ghost" asChild size="sm" className="hidden md:flex">
+          {/* Mobile View All Button */}
+          <div className="mt-6 md:hidden">
+            <Button variant="outline" asChild className="w-full">
               <Link to="/courses">
-                View All
+                View All Courses
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
             </Button>
           </div>
         </div>
-
-        {/* Smooth auto-scrolling carousel with pause on hover */}
-        <AutoScrollCarousel className="px-4" speed={25} pauseOnHover={true}>
-          {featuredCourses.map((course) => (
-            <div 
-              key={course.id} 
-              className="flex-shrink-0 w-[260px] sm:w-[300px] md:w-[320px] transition-transform duration-300 ease-in-out hover:scale-[1.02]"
-            >
-              <CourseCard course={course} />
-            </div>
-          ))}
-        </AutoScrollCarousel>
-
-        <div className="container mx-auto px-4 mt-4 md:hidden">
-          <Button variant="outline" asChild size="sm" className="w-full">
-            <Link to="/courses">
-              View All Courses
-              <ArrowRight className="w-4 h-4 ml-1" />
-            </Link>
-          </Button>
-        </div>
       </section>
 
-      {/* Categories Grid */}
-      <section className="py-12 sm:py-16 md:py-20 bg-card">
+      {/* 3. Browse by Categories */}
+      <section className="py-10 md:py-14 bg-secondary/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Explore Categories</h2>
-            <p className="text-muted-foreground mt-1 sm:mt-2 text-sm sm:text-base">Find courses that match your career goals</p>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">Top Categories</h2>
+            <p className="text-muted-foreground mt-2">Find courses that match your career goals</p>
           </div>
 
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 md:gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3 md:gap-4">
             {categories.map((category, index) => (
+              <Link
+                key={category.id}
+                to={`/courses?category=${category.slug}`}
+                className="group p-4 md:p-6 bg-background rounded-lg border border-border text-center card-hover animate-fade-up"
+                style={{ animationDelay: `${index * 50}ms` }}
+              >
+                <div className={`w-12 h-12 md:w-14 md:h-14 rounded-lg bg-gradient-to-br ${category.color} flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform`}>
+                  <TrendingUp className="w-6 h-6 text-white" />
+                </div>
+                <h3 className="font-semibold text-sm md:text-base text-foreground group-hover:text-primary transition-colors">
+                  {category.name}
+                </h3>
+                <p className="text-xs text-muted-foreground mt-1">{category.courseCount} courses</p>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. How It Works */}
+      <section className="py-10 md:py-14">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">How Mwanzo Works</h2>
+            <p className="text-muted-foreground mt-2">From learning to landing your dream job in three simple steps</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto">
+            {howItWorks.map((step, index) => (
               <div 
-                key={category.id} 
-                className="animate-fade-up"
+                key={step.title} 
+                className="relative text-center p-6 rounded-xl bg-card border border-border animate-fade-up"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <CategoryCard category={category} />
+                <div className="relative w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
+                  <step.icon className="w-8 h-8 text-primary" />
+                  <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center">
+                    {index + 1}
+                  </span>
+                </div>
+                <h3 className="text-lg font-bold text-foreground mb-2">{step.title}</h3>
+                <p className="text-sm text-muted-foreground">{step.description}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Meet Our Tutors - NEW SECTION */}
-      <section className="py-12 sm:py-16 md:py-20">
+      {/* 5. Featured Job Opportunities - UNIQUE TO MWANZO */}
+      <section className="py-10 md:py-14 bg-secondary/30">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-4">
-              <GraduationCap className="w-4 h-4 text-primary" />
-              <span className="text-xs sm:text-sm text-primary font-medium">Learn from the Best</span>
-            </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Meet Our Expert Tutors</h2>
-            <p className="text-muted-foreground mt-2 text-sm sm:text-base max-w-xl mx-auto">
-              Industry professionals from top Kenyan companies sharing real-world experience
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-            {tutors.map((tutor, index) => (
-              <div 
-                key={tutor.id} 
-                className="animate-fade-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <TutorCard tutor={tutor} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Testimonials */}
-      <section className="py-12 sm:py-16 md:py-20 bg-card">
-        <div className="container mx-auto px-4">
-          <div className="text-center mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Success Stories</h2>
-            <p className="text-muted-foreground mt-1 sm:mt-2 text-sm sm:text-base">Real Kenyans, real results</p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <div 
-                key={testimonial.id} 
-                className="animate-fade-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <TestimonialCard testimonial={testimonial} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Job Opportunities Teaser */}
-      <section className="py-12 sm:py-16 md:py-20">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8 sm:mb-10">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
             <div>
-              <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Fresh Job Opportunities</h2>
-              <p className="text-muted-foreground mt-1 sm:mt-2 text-sm sm:text-base">Available exclusively to Mwanzo graduates</p>
+              <div className="flex items-center gap-2 mb-1">
+                <Briefcase className="w-5 h-5 text-success" />
+                <span className="text-sm font-medium text-success">Exclusive to Mwanzo Graduates</span>
+              </div>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground">Fresh Job Opportunities</h2>
             </div>
-            <Button variant="ghost" asChild className="hidden md:flex">
+            <Button variant="ghost" asChild className="hidden md:flex text-primary hover:text-primary/80">
               <Link to="/jobs">
                 View All Jobs
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
             </Button>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+          <div className="grid md:grid-cols-2 gap-4">
             {featuredJobs.map((job, index) => (
               <div 
                 key={job.id} 
@@ -401,49 +267,123 @@ const Index = () => {
             <Button variant="outline" asChild className="w-full">
               <Link to="/jobs">
                 View All Jobs
-                <ArrowRight className="w-4 h-4 ml-2" />
+                <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
             </Button>
           </div>
         </div>
       </section>
 
-      {/* CTA Section - Mobile First */}
-      <section className="py-12 sm:py-16 md:py-24">
+      {/* 6. Success Stories / Testimonials */}
+      <section className="py-10 md:py-14">
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-4 sm:gap-6 max-w-5xl mx-auto">
-            {/* For Students */}
-            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-to-br from-primary/20 via-primary/10 to-background border border-primary/20 p-6 sm:p-8 md:p-10">
-              <div className="absolute top-0 right-0 w-32 sm:w-40 h-32 sm:h-40 bg-primary/10 rounded-full blur-3xl" />
-              <div className="relative">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4">Ready to Start Learning?</h3>
-                <p className="text-sm sm:text-base text-muted-foreground mb-5 sm:mb-6">
-                  Join thousands of Kenyans building their future with in-demand skills.
-                </p>
-                <Button asChild className="btn-primary w-full sm:w-auto">
-                  <Link to="/courses">
-                    Explore Courses
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
+          <div className="text-center mb-8">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">Success Stories from Kenyans Like You</h2>
+            <p className="text-muted-foreground mt-2">Real students, real results</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto">
+            {testimonials.map((testimonial, index) => (
+              <div 
+                key={testimonial.id} 
+                className="animate-fade-up"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <TestimonialCard testimonial={testimonial} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Meet Our Tutors */}
+      <section className="py-10 md:py-14 bg-secondary/30">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-8">
+            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/10 border border-primary/20 mb-3">
+              <GraduationCap className="w-4 h-4 text-primary" />
+              <span className="text-xs text-primary font-medium">Learn from the Best</span>
+            </div>
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground">Learn from Industry Experts</h2>
+            <p className="text-muted-foreground mt-2">Industry professionals from top Kenyan companies</p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+            {tutors.map((tutor, index) => (
+              <div 
+                key={tutor.id} 
+                className="animate-fade-up"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                <TutorCard tutor={tutor} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 8. Trust Signals / Stats */}
+      <section className="py-10 md:py-14">
+        <div className="container mx-auto px-4">
+          <div className="bg-foreground rounded-2xl p-8 md:p-12 text-background">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+              <div className="animate-fade-up">
+                <div className="text-3xl md:text-4xl font-bold">15,000+</div>
+                <p className="text-background/70 mt-1 text-sm">Students Enrolled</p>
+              </div>
+              <div className="animate-fade-up delay-100">
+                <div className="text-3xl md:text-4xl font-bold">500+</div>
+                <p className="text-background/70 mt-1 text-sm">Course Completions</p>
+              </div>
+              <div className="animate-fade-up delay-200">
+                <div className="text-3xl md:text-4xl font-bold">50+</div>
+                <p className="text-background/70 mt-1 text-sm">Hiring Partners</p>
+              </div>
+              <div className="animate-fade-up delay-300">
+                <div className="text-3xl md:text-4xl font-bold">40%</div>
+                <p className="text-background/70 mt-1 text-sm">Avg. Salary Increase</p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
 
-            {/* For Businesses */}
-            <div className="relative overflow-hidden rounded-2xl sm:rounded-3xl bg-gradient-card border border-border p-6 sm:p-8 md:p-10">
-              <div className="absolute bottom-0 left-0 w-32 sm:w-40 h-32 sm:h-40 bg-turquoise/5 rounded-full blur-3xl" />
-              <div className="relative">
-                <h3 className="text-xl sm:text-2xl md:text-3xl font-bold mb-3 sm:mb-4">Hiring Skilled Talent?</h3>
-                <p className="text-sm sm:text-base text-muted-foreground mb-5 sm:mb-6">
-                  Access our pool of verified, skilled graduates ready to contribute from day one.
-                </p>
-                <Button variant="outline" asChild className="w-full sm:w-auto">
-                  <Link to="/business/register">
-                    Post a Job
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
+      {/* 9. Dual CTA */}
+      <section className="py-10 md:py-14 bg-secondary/30">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {/* For Learners */}
+            <div className="bg-background rounded-xl p-6 md:p-8 border border-border text-center md:text-left">
+              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-4 mx-auto md:mx-0">
+                <BookOpen className="w-6 h-6 text-accent" />
               </div>
+              <h3 className="text-xl font-bold text-foreground mb-2">Ready to Start Learning?</h3>
+              <p className="text-muted-foreground text-sm mb-4">
+                Browse our catalog of industry-relevant courses and start your journey today.
+              </p>
+              <Button asChild className="btn-accent w-full md:w-auto">
+                <Link to="/courses">
+                  Explore Courses
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
+            </div>
+
+            {/* For Employers */}
+            <div className="bg-background rounded-xl p-6 md:p-8 border border-border text-center md:text-left">
+              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 mx-auto md:mx-0">
+                <Building2 className="w-6 h-6 text-primary" />
+              </div>
+              <h3 className="text-xl font-bold text-foreground mb-2">Hiring Skilled Talent?</h3>
+              <p className="text-muted-foreground text-sm mb-4">
+                Connect with job-ready graduates trained in the skills you need.
+              </p>
+              <Button asChild variant="outline" className="w-full md:w-auto border-primary text-primary hover:bg-primary/5">
+                <Link to="/post-job">
+                  Post a Job
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Link>
+              </Button>
             </div>
           </div>
         </div>

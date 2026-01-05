@@ -16,17 +16,17 @@ export function JobCard({ job, variant = 'default' }: JobCardProps) {
   const isQualified = job.requiredCourses.every(courseId => hasCompleted(courseId));
 
   const typeColors: Record<string, string> = {
-    'Full-time': 'bg-success/20 text-success',
-    'Part-time': 'bg-turquoise/20 text-turquoise',
-    'Contract': 'bg-warning/20 text-warning',
-    'Freelance': 'bg-primary/20 text-primary',
+    'Full-time': 'bg-success/10 text-success border-success/20',
+    'Part-time': 'bg-primary/10 text-primary border-primary/20',
+    'Contract': 'bg-warning/10 text-warning border-warning/20',
+    'Freelance': 'bg-accent/10 text-accent border-accent/20',
   };
 
   if (variant === 'compact') {
     return (
       <Link
         to={`/jobs/${job.id}`}
-        className="group flex items-center gap-4 bg-gradient-card rounded-xl border border-border p-4 card-hover"
+        className="group flex items-center gap-4 bg-background rounded-lg border border-border p-4 card-hover"
       >
         <img
           src={job.companyLogo}
@@ -35,14 +35,14 @@ export function JobCard({ job, variant = 'default' }: JobCardProps) {
         />
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2">
-            <h4 className="font-semibold truncate group-hover:text-primary transition-colors">
+            <h4 className="font-semibold text-foreground truncate group-hover:text-primary transition-colors">
               {job.title}
             </h4>
             {!isQualified && <Lock className="w-4 h-4 text-muted-foreground flex-shrink-0" />}
           </div>
           <p className="text-sm text-muted-foreground">{job.company}</p>
         </div>
-        <Badge className={typeColors[job.type]}>{job.type}</Badge>
+        <Badge className={`${typeColors[job.type]} border`}>{job.type}</Badge>
       </Link>
     );
   }
@@ -50,70 +50,69 @@ export function JobCard({ job, variant = 'default' }: JobCardProps) {
   return (
     <Link
       to={`/jobs/${job.id}`}
-      className={`group block bg-gradient-card rounded-xl sm:rounded-2xl border border-border overflow-hidden card-hover ${
-        !isQualified ? 'opacity-80' : ''
+      className={`group block bg-background rounded-lg border border-border overflow-hidden card-hover ${
+        !isQualified ? 'opacity-90' : ''
       }`}
     >
-      <div className="p-4 sm:p-6">
+      <div className="p-4 md:p-5">
         {/* Header */}
-        <div className="flex items-start gap-3 sm:gap-4">
+        <div className="flex items-start gap-3 md:gap-4">
           <img
             src={job.companyLogo}
             alt={job.company}
-            className="w-10 h-10 sm:w-14 sm:h-14 rounded-lg sm:rounded-xl object-cover"
+            className="w-12 h-12 md:w-14 md:h-14 rounded-lg object-cover border border-border"
           />
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <h3 className="font-bold text-sm sm:text-lg group-hover:text-primary transition-colors">
+              <h3 className="font-bold text-base text-foreground group-hover:text-primary transition-colors">
                 {job.title}
               </h3>
               {!isQualified ? (
-                <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-muted-foreground" />
+                <Lock className="w-4 h-4 text-muted-foreground" />
               ) : (
-                <CheckCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-success" />
+                <CheckCircle className="w-4 h-4 text-success" />
               )}
             </div>
-            <p className="text-xs sm:text-sm text-muted-foreground">{job.company}</p>
+            <p className="text-sm text-muted-foreground">{job.company}</p>
           </div>
-          <Badge className={`${typeColors[job.type]} text-[10px] sm:text-xs`}>{job.type}</Badge>
+          <Badge className={`${typeColors[job.type]} border text-xs`}>{job.type}</Badge>
         </div>
 
         {/* Details */}
-        <div className="flex flex-wrap items-center gap-2 sm:gap-4 mt-3 sm:mt-4 text-xs sm:text-sm text-muted-foreground">
+        <div className="flex flex-wrap items-center gap-3 mt-3 text-sm text-muted-foreground">
           <span className="flex items-center gap-1">
-            <MapPin className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <MapPin className="w-4 h-4" />
             {job.location}
           </span>
           <span className="flex items-center gap-1">
-            <Briefcase className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-            <span className="hidden xs:inline">{job.salary}</span>
-            <span className="xs:hidden">{job.salary.split('/')[0]}</span>
+            <Briefcase className="w-4 h-4" />
+            {job.salary}
           </span>
           <span className="flex items-center gap-1">
-            <Clock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+            <Clock className="w-4 h-4" />
             {job.postedDate}
           </span>
         </div>
 
         {/* Skills */}
-        <div className="flex flex-wrap gap-1.5 sm:gap-2 mt-3 sm:mt-4">
-          {job.requiredSkills.slice(0, 3).map((skill) => (
-            <Badge key={skill} variant="outline" className="text-[10px] sm:text-xs">
+        <div className="flex flex-wrap gap-1.5 mt-3">
+          {job.requiredSkills.slice(0, 4).map((skill) => (
+            <Badge key={skill} variant="outline" className="text-xs font-normal">
               {skill}
             </Badge>
           ))}
-          {job.requiredSkills.length > 3 && (
-            <Badge variant="outline" className="text-[10px] sm:text-xs">
-              +{job.requiredSkills.length - 3}
+          {job.requiredSkills.length > 4 && (
+            <Badge variant="outline" className="text-xs font-normal">
+              +{job.requiredSkills.length - 4}
             </Badge>
           )}
         </div>
 
         {/* Locked message */}
         {!isQualified && (
-          <div className="mt-3 sm:mt-4 p-2 sm:p-3 rounded-lg bg-muted/50 border border-border">
-            <p className="text-xs sm:text-sm text-muted-foreground flex items-center gap-2">
-              <Lock className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+          <div className="mt-3 p-2.5 rounded-md bg-muted border border-border">
+            <p className="text-xs text-muted-foreground flex items-center gap-2">
+              <Lock className="w-3.5 h-3.5" />
               Complete required courses to apply
             </p>
           </div>

@@ -16,7 +16,7 @@ const footerLinks = {
     { name: 'Support', href: '/support' },
   ],
   forBusiness: [
-    { name: 'Post a Job', href: '/business/post-job' },
+    { name: 'Post a Job', href: '/post-job' },
     { name: 'Business Dashboard', href: '/business' },
     { name: 'Find Talent', href: '/jobs' },
     { name: 'Enterprise', href: '/enterprise' },
@@ -45,19 +45,19 @@ const socialLinks = [
 export function Footer() {
   return (
     <footer className="bg-card border-t border-border">
-      <div className="container mx-auto px-4 py-12 md:py-16">
+      <div className="container mx-auto px-4 py-10 md:py-12">
         {/* Main Footer Content */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-10">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2">
             <Logo size="md" className="mb-4" />
-            <p className="text-muted-foreground text-sm leading-relaxed mb-6 max-w-sm">
+            <p className="text-muted-foreground text-sm leading-relaxed mb-5 max-w-sm">
               Mwanzo connects ambitious Kenyans with in-demand skills and verified job opportunities. 
               Your journey to success starts here.
             </p>
             
             {/* Contact Info */}
-            <div className="space-y-3 text-sm">
+            <div className="space-y-2 text-sm">
               <a href="mailto:hello@mwanzo.co.ke" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
                 <Mail className="w-4 h-4" />
                 hello@mwanzo.co.ke
@@ -75,8 +75,8 @@ export function Footer() {
 
           {/* Links Columns */}
           <div>
-            <h4 className="font-semibold mb-4">For Students</h4>
-            <ul className="space-y-3">
+            <h4 className="font-semibold text-foreground mb-3">For Students</h4>
+            <ul className="space-y-2">
               {footerLinks.forStudents.map((link) => (
                 <li key={link.name}>
                   <Link
@@ -91,8 +91,8 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">For Tutors</h4>
-            <ul className="space-y-3">
+            <h4 className="font-semibold text-foreground mb-3">For Tutors</h4>
+            <ul className="space-y-2">
               {footerLinks.forTutors.map((link) => (
                 <li key={link.name}>
                   <Link
@@ -107,8 +107,8 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Company</h4>
-            <ul className="space-y-3">
+            <h4 className="font-semibold text-foreground mb-3">Company</h4>
+            <ul className="space-y-2">
               {footerLinks.company.map((link) => (
                 <li key={link.name}>
                   <Link
@@ -123,8 +123,8 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="font-semibold mb-4">Support</h4>
-            <ul className="space-y-3">
+            <h4 className="font-semibold text-foreground mb-3">Support</h4>
+            <ul className="space-y-2">
               {footerLinks.support.map((link) => (
                 <li key={link.name}>
                   <Link
@@ -140,19 +140,19 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+        <div className="mt-10 pt-6 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-center sm:text-left">
             <p className="text-sm text-muted-foreground">
-              © {new Date().getFullYear()} Mwanzo Kenya. All rights reserved.
+              © {new Date().getFullYear()} Mwanzo Skills Campus. All rights reserved.
             </p>
-            <span className="hidden sm:inline text-muted-foreground/50">•</span>
+            <span className="hidden sm:inline text-muted-foreground/40">•</span>
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <span>Designed & Developed by</span>
               <a 
                 href="https://wa.me/254796814154" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 font-medium text-primary hover:underline"
+                className="inline-flex items-center gap-1.5 font-medium text-success hover:underline"
               >
                 Mr. Mdau
                 <svg 
@@ -167,14 +167,14 @@ export function Footer() {
           </div>
           
           {/* Social Links */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             {socialLinks.map((social) => (
               <a
                 key={social.name}
                 href={social.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 rounded-lg text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
+                className="p-2 rounded-md text-muted-foreground hover:text-primary hover:bg-muted transition-colors"
                 aria-label={social.name}
               >
                 <social.icon className="w-5 h-5" />

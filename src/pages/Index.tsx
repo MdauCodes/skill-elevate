@@ -1,6 +1,12 @@
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, ArrowRight, BookOpen, Briefcase, Award, Star, Users, CheckCircle, TrendingUp, GraduationCap, Building2 } from 'lucide-react';
+
+// Human-centric images of Kenyan professionals
+import heroImage from '@/assets/hero-kenyan-professionals.jpg';
+import learnerSuccessImage from '@/assets/learner-success.jpg';
+import skilledDeveloperImage from '@/assets/skilled-developer.jpg';
+import jobPlacementImage from '@/assets/job-placement-success.jpg';
 import { Button } from '@/components/ui/button';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -56,63 +62,89 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* 1. Hero Section - Clean with prominent search */}
-      <section className="bg-gradient-hero border-b border-border">
+      {/* 1. Hero Section - Clean with prominent search + humanizing image */}
+      <section className="bg-gradient-hero border-b border-border overflow-hidden">
         <div className="container mx-auto px-4 py-10 md:py-14">
-          <div className="max-w-3xl mx-auto text-center">
-            {/* Main Headline */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight">
-              Learn In-Demand Skills.{' '}
-              <span className="text-primary">Get Hired in Kenya.</span>
-            </h1>
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            {/* Left - Content */}
+            <div className="text-center lg:text-left order-2 lg:order-1">
+              {/* Main Headline */}
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                Learn In-Demand Skills.{' '}
+                <span className="text-primary">Get Hired in Kenya.</span>
+              </h1>
 
-            <p className="text-muted-foreground mt-4 text-base md:text-lg max-w-xl mx-auto">
-              Join 15,000+ Kenyans learning practical skills and landing jobs at top companies.
-            </p>
+              <p className="text-muted-foreground mt-4 text-base md:text-lg max-w-xl mx-auto lg:mx-0">
+                Join 15,000+ Kenyans learning practical skills and landing jobs at top companies.
+              </p>
 
-            {/* Search Bar */}
-            <form onSubmit={handleSearch} className="mt-6 md:mt-8">
-              <div className="relative max-w-xl mx-auto">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="What do you want to learn?"
-                  className="w-full pl-12 pr-32 py-4 bg-background border border-border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary shadow-sm"
-                />
-                <Button type="submit" className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90">
-                  Search
-                </Button>
+              {/* Search Bar */}
+              <form onSubmit={handleSearch} className="mt-6 md:mt-8">
+                <div className="relative max-w-xl mx-auto lg:mx-0">
+                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="What do you want to learn?"
+                    className="w-full pl-12 pr-32 py-4 bg-background border border-border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary shadow-sm"
+                  />
+                  <Button type="submit" className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90">
+                    Search
+                  </Button>
+                </div>
+              </form>
+
+              {/* Quick Category Pills */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 mt-6">
+                {categories.slice(0, 5).map((cat) => (
+                  <Link 
+                    key={cat.id}
+                    to={`/courses?category=${cat.slug}`}
+                    className="category-pill text-xs md:text-sm"
+                  >
+                    {cat.name}
+                  </Link>
+                ))}
               </div>
-            </form>
 
-            {/* Quick Category Pills */}
-            <div className="flex flex-wrap items-center justify-center gap-2 mt-6">
-              {categories.slice(0, 5).map((cat) => (
-                <Link 
-                  key={cat.id}
-                  to={`/courses?category=${cat.slug}`}
-                  className="category-pill text-xs md:text-sm"
-                >
-                  {cat.name}
-                </Link>
-              ))}
+              {/* Trust Indicators */}
+              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-6 mt-8 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <Users className="w-4 h-4 text-primary" />
+                  <span>15,000+ students</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Star className="w-4 h-4 text-warning fill-warning" />
+                  <span>4.8 rating</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Briefcase className="w-4 h-4 text-success" />
+                  <span>Job Support</span>
+                </div>
+              </div>
             </div>
 
-            {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-8 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Users className="w-4 h-4 text-primary" />
-                <span>15,000+ students</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Star className="w-4 h-4 text-warning fill-warning" />
-                <span>4.8 average rating</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <Briefcase className="w-4 h-4 text-success" />
-                <span>Job Placement Support</span>
+            {/* Right - Hero Image */}
+            <div className="order-1 lg:order-2 animate-fade-up">
+              <div className="relative">
+                <div className="aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-border/50">
+                  <img 
+                    src={heroImage} 
+                    alt="Kenyan professionals collaborating in a modern workspace" 
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                {/* Floating badge */}
+                <div className="absolute -bottom-4 -left-4 bg-background border border-border rounded-xl p-3 shadow-lg hidden md:flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center">
+                    <CheckCircle className="w-5 h-5 text-success" />
+                  </div>
+                  <div>
+                    <p className="text-xs text-muted-foreground">This Week</p>
+                    <p className="font-semibold text-foreground text-sm">47 Graduates Hired</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -203,7 +235,7 @@ const Index = () => {
         </div>
       </section>
 
-      {/* 4. How It Works */}
+      {/* 4. How It Works - with humanizing images */}
       <section className="py-10 md:py-14">
         <div className="container mx-auto px-4">
           <div className="text-center mb-10">
@@ -211,23 +243,51 @@ const Index = () => {
             <p className="text-muted-foreground mt-2">From learning to landing your dream job in three simple steps</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto">
-            {howItWorks.map((step, index) => (
-              <div 
-                key={step.title} 
-                className="relative text-center p-6 rounded-xl bg-card border border-border animate-fade-up"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="relative w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mx-auto mb-4">
-                  <step.icon className="w-8 h-8 text-primary" />
-                  <span className="absolute -top-1 -right-1 w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center">
-                    {index + 1}
-                  </span>
-                </div>
-                <h3 className="text-lg font-bold text-foreground mb-2">{step.title}</h3>
-                <p className="text-sm text-muted-foreground">{step.description}</p>
+          {/* Steps with images */}
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8 max-w-5xl mx-auto">
+            {/* Step 1 - Learn */}
+            <div 
+              className="relative text-center p-6 rounded-xl bg-card border border-border animate-fade-up group hover:shadow-lg transition-shadow"
+            >
+              <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4 border-2 border-primary/20 group-hover:border-primary transition-colors">
+                <img src={learnerSuccessImage} alt="Kenyan learner studying online" className="w-full h-full object-cover" />
               </div>
-            ))}
+              <span className="absolute top-4 right-4 w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center">
+                1
+              </span>
+              <h3 className="text-lg font-bold text-foreground mb-2">Learn a Skill</h3>
+              <p className="text-sm text-muted-foreground">Enroll in courses taught by experienced Kenyan professionals</p>
+            </div>
+
+            {/* Step 2 - Get Certified */}
+            <div 
+              className="relative text-center p-6 rounded-xl bg-card border border-border animate-fade-up group hover:shadow-lg transition-shadow"
+              style={{ animationDelay: '100ms' }}
+            >
+              <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4 border-2 border-primary/20 group-hover:border-primary transition-colors">
+                <img src={skilledDeveloperImage} alt="Skilled Kenyan developer at work" className="w-full h-full object-cover" />
+              </div>
+              <span className="absolute top-4 right-4 w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center">
+                2
+              </span>
+              <h3 className="text-lg font-bold text-foreground mb-2">Get Certified</h3>
+              <p className="text-sm text-muted-foreground">Earn certificates recognized by top employers across Kenya</p>
+            </div>
+
+            {/* Step 3 - Get Hired */}
+            <div 
+              className="relative text-center p-6 rounded-xl bg-card border border-border animate-fade-up group hover:shadow-lg transition-shadow"
+              style={{ animationDelay: '200ms' }}
+            >
+              <div className="w-20 h-20 rounded-full overflow-hidden mx-auto mb-4 border-2 border-primary/20 group-hover:border-primary transition-colors">
+                <img src={jobPlacementImage} alt="Successful job placement handshake" className="w-full h-full object-cover object-top" />
+              </div>
+              <span className="absolute top-4 right-4 w-6 h-6 rounded-full bg-primary text-primary-foreground text-sm font-bold flex items-center justify-center">
+                3
+              </span>
+              <h3 className="text-lg font-bold text-foreground mb-2">Get a Job</h3>
+              <p className="text-sm text-muted-foreground">Access exclusive job opportunities matched to your new skills</p>
+            </div>
           </div>
         </div>
       </section>
@@ -348,16 +408,26 @@ const Index = () => {
         </div>
       </section>
 
-      {/* 9. Dual CTA */}
-      <section className="py-10 md:py-14 bg-secondary/30">
-        <div className="container mx-auto px-4">
+      {/* 9. Dual CTA - with humanizing background */}
+      <section className="py-10 md:py-14 bg-secondary/30 relative overflow-hidden">
+        {/* Subtle background image overlay */}
+        <div className="absolute inset-0 opacity-5">
+          <img src={heroImage} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+        </div>
+        
+        <div className="container mx-auto px-4 relative z-10">
           <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
             {/* For Learners */}
-            <div className="bg-background rounded-xl p-6 md:p-8 border border-border text-center md:text-left">
-              <div className="w-12 h-12 rounded-full bg-accent/10 flex items-center justify-center mb-4 mx-auto md:mx-0">
-                <BookOpen className="w-6 h-6 text-accent" />
+            <div className="bg-background rounded-xl p-6 md:p-8 border border-border text-center md:text-left shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-accent/20">
+                  <img src={learnerSuccessImage} alt="Happy Mwanzo learner" className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">Ready to Start Learning?</h3>
+                  <p className="text-xs text-muted-foreground">Join 15,000+ Kenyan learners</p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">Ready to Start Learning?</h3>
               <p className="text-muted-foreground text-sm mb-4">
                 Browse our catalog of industry-relevant courses and start your journey today.
               </p>
@@ -370,11 +440,16 @@ const Index = () => {
             </div>
 
             {/* For Employers */}
-            <div className="bg-background rounded-xl p-6 md:p-8 border border-border text-center md:text-left">
-              <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-4 mx-auto md:mx-0">
-                <Building2 className="w-6 h-6 text-primary" />
+            <div className="bg-background rounded-xl p-6 md:p-8 border border-border text-center md:text-left shadow-sm hover:shadow-md transition-shadow">
+              <div className="flex items-center gap-4 mb-4">
+                <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-primary/20">
+                  <img src={jobPlacementImage} alt="Successful hiring" className="w-full h-full object-cover object-top" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-foreground">Hiring Skilled Talent?</h3>
+                  <p className="text-xs text-muted-foreground">50+ hiring partners trust us</p>
+                </div>
               </div>
-              <h3 className="text-xl font-bold text-foreground mb-2">Hiring Skilled Talent?</h3>
               <p className="text-muted-foreground text-sm mb-4">
                 Connect with job-ready graduates trained in the skills you need.
               </p>

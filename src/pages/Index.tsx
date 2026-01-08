@@ -62,89 +62,86 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* 1. Hero Section - Clean with prominent search + humanizing image */}
-      <section className="bg-gradient-hero border-b border-border overflow-hidden">
-        <div className="container mx-auto px-4 py-10 md:py-14">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-            {/* Left - Content */}
-            <div className="text-center lg:text-left order-2 lg:order-1">
-              {/* Main Headline */}
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight">
-                Learn In-Demand Skills.{' '}
-                <span className="text-primary">Get Hired in Kenya.</span>
-              </h1>
+      {/* 1. Hero Section - Image as background with text overlay */}
+      <section className="relative min-h-[500px] md:min-h-[550px] overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img 
+            src={heroImage} 
+            alt="Kenyan professionals collaborating" 
+            className="w-full h-full object-cover"
+          />
+          {/* Gradient Overlay for text legibility */}
+          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/60" />
+        </div>
+        
+        {/* Content */}
+        <div className="relative container mx-auto px-4 py-12 md:py-16">
+          <div className="max-w-2xl">
+            {/* Main Headline */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight animate-fade-in">
+              Learn In-Demand Skills.{' '}
+              <span className="text-primary">Get Hired in Kenya.</span>
+            </h1>
 
-              <p className="text-muted-foreground mt-4 text-base md:text-lg max-w-xl mx-auto lg:mx-0">
-                Join 15,000+ Kenyans learning practical skills and landing jobs at top companies.
-              </p>
+            <p className="text-muted-foreground mt-4 text-base md:text-lg max-w-xl">
+              Join 15,000+ Kenyans learning practical skills and landing jobs at top companies.
+            </p>
 
-              {/* Search Bar */}
-              <form onSubmit={handleSearch} className="mt-6 md:mt-8">
-                <div className="relative max-w-xl mx-auto lg:mx-0">
-                  <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="What do you want to learn?"
-                    className="w-full pl-12 pr-32 py-4 bg-background border border-border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary shadow-sm"
-                  />
-                  <Button type="submit" className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90">
-                    Search
-                  </Button>
-                </div>
-              </form>
-
-              {/* Quick Category Pills */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-2 mt-6">
-                {categories.slice(0, 5).map((cat) => (
-                  <Link 
-                    key={cat.id}
-                    to={`/courses?category=${cat.slug}`}
-                    className="category-pill text-xs md:text-sm"
-                  >
-                    {cat.name}
-                  </Link>
-                ))}
+            {/* Search Bar */}
+            <form onSubmit={handleSearch} className="mt-6 md:mt-8">
+              <div className="relative max-w-xl">
+                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="What do you want to learn?"
+                  className="w-full pl-12 pr-32 py-4 bg-background border border-border rounded-md text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary shadow-lg"
+                />
+                <Button type="submit" className="absolute right-1.5 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90">
+                  Search
+                </Button>
               </div>
+            </form>
 
-              {/* Trust Indicators */}
-              <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-6 mt-8 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <Users className="w-4 h-4 text-primary" />
-                  <span>15,000+ students</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Star className="w-4 h-4 text-warning fill-warning" />
-                  <span>4.8 rating</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Briefcase className="w-4 h-4 text-success" />
-                  <span>Job Support</span>
-                </div>
+            {/* Quick Category Pills */}
+            <div className="flex flex-wrap items-center gap-2 mt-6">
+              {categories.slice(0, 5).map((cat) => (
+                <Link 
+                  key={cat.id}
+                  to={`/courses?category=${cat.slug}`}
+                  className="category-pill text-xs md:text-sm"
+                >
+                  {cat.name}
+                </Link>
+              ))}
+            </div>
+
+            {/* Trust Indicators */}
+            <div className="flex flex-wrap items-center gap-4 md:gap-6 mt-8 text-sm">
+              <div className="flex items-center gap-2 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                <Users className="w-4 h-4 text-primary" />
+                <span className="text-foreground font-medium">15,000+ students</span>
+              </div>
+              <div className="flex items-center gap-2 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                <Star className="w-4 h-4 text-warning fill-warning" />
+                <span className="text-foreground font-medium">4.8 rating</span>
+              </div>
+              <div className="flex items-center gap-2 bg-background/80 backdrop-blur-sm px-3 py-1.5 rounded-full">
+                <Briefcase className="w-4 h-4 text-success" />
+                <span className="text-foreground font-medium">Job Support</span>
               </div>
             </div>
 
-            {/* Right - Hero Image */}
-            <div className="order-1 lg:order-2 animate-fade-up">
-              <div className="relative">
-                <div className="aspect-[16/10] rounded-2xl overflow-hidden shadow-2xl border border-border/50">
-                  <img 
-                    src={heroImage} 
-                    alt="Kenyan professionals collaborating in a modern workspace" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                {/* Floating badge */}
-                <div className="absolute -bottom-4 -left-4 bg-background border border-border rounded-xl p-3 shadow-lg hidden md:flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center">
-                    <CheckCircle className="w-5 h-5 text-success" />
-                  </div>
-                  <div>
-                    <p className="text-xs text-muted-foreground">This Week</p>
-                    <p className="font-semibold text-foreground text-sm">47 Graduates Hired</p>
-                  </div>
-                </div>
+            {/* Floating badge */}
+            <div className="mt-8 inline-flex items-center gap-3 bg-background border border-border rounded-xl p-3 shadow-lg">
+              <div className="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center">
+                <CheckCircle className="w-5 h-5 text-success" />
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">This Week</p>
+                <p className="font-semibold text-foreground text-sm">47 Graduates Hired</p>
               </div>
             </div>
           </div>

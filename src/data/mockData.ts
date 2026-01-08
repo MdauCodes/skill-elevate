@@ -226,6 +226,16 @@ export const tutors: Tutor[] = [
   },
 ];
 
+// Import course thumbnails - these show real Kenyan professionals
+import courseDigitalMarketing from '@/assets/course-digital-marketing.jpg';
+import courseAiMl from '@/assets/course-ai-ml.jpg';
+import courseWebDev from '@/assets/course-web-dev.jpg';
+import courseSocialMedia from '@/assets/course-social-media.jpg';
+import courseGraphicDesign from '@/assets/course-graphic-design.jpg';
+import courseVideoEditing from '@/assets/course-video-editing.jpg';
+import courseDataAnalysis from '@/assets/course-data-analysis.jpg';
+import courseBusiness from '@/assets/course-business.jpg';
+
 // Courses with category-relevant YouTube preview videos
 export const courses: Course[] = [
   {
@@ -233,7 +243,7 @@ export const courses: Course[] = [
     slug: 'complete-digital-marketing-masterclass',
     title: 'Complete Digital Marketing Masterclass 2024',
     shortDescription: 'Master SEO, social media, Google Ads, and analytics to grow any business online.',
-    description: 'This comprehensive course covers everything you need to know about digital marketing in the Kenyan and East African context. From understanding local consumer behavior to mastering Google Ads for the regional market, you\'ll learn practical skills that employers are actively seeking.',
+    description: "This comprehensive course covers everything you need to know about digital marketing in the Kenyan and East African context. From understanding local consumer behavior to mastering Google Ads for the regional market, you'll learn practical skills that employers are actively seeking.",
     tutor: tutors[0],
     category: categories[0],
     price: 7500,
@@ -244,7 +254,7 @@ export const courses: Course[] = [
     duration: '12.5 hours',
     lessonsCount: 45,
     level: 'Beginner',
-    thumbnail: 'https://images.unsplash.com/photo-1432888622747-4eb9a8f2c293?w=800&h=450&fit=crop',
+    thumbnail: courseDigitalMarketing,
     previewVideo: 'https://cdn.pixabay.com/video/2020/05/25/40130-424930032_large.mp4',
     youtubePreviewId: 'bixR-KIJKYM',
     isTrending: true,
@@ -308,7 +318,7 @@ export const courses: Course[] = [
     duration: '18 hours',
     lessonsCount: 52,
     level: 'Intermediate',
-    thumbnail: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=450&fit=crop',
+    thumbnail: courseAiMl,
     previewVideo: 'https://cdn.pixabay.com/video/2019/06/19/24569-343001767_large.mp4',
     youtubePreviewId: 'ad79nYk2keg',
     isTrending: true,
@@ -362,7 +372,7 @@ export const courses: Course[] = [
     duration: '40 hours',
     lessonsCount: 120,
     level: 'Beginner',
-    thumbnail: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&h=450&fit=crop',
+    thumbnail: courseWebDev,
     previewVideo: 'https://cdn.pixabay.com/video/2020/02/12/32489-392015291_large.mp4',
     youtubePreviewId: 'UB1O30fR-EE',
     isTrending: true,
@@ -424,7 +434,7 @@ export const courses: Course[] = [
     duration: '8 hours',
     lessonsCount: 28,
     level: 'Beginner',
-    thumbnail: 'https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=450&fit=crop',
+    thumbnail: courseSocialMedia,
     previewVideo: 'https://cdn.pixabay.com/video/2020/07/30/45603-445912296_large.mp4',
     youtubePreviewId: 'I2pwcAVonKI',
     isFeatured: true,
@@ -477,7 +487,7 @@ export const courses: Course[] = [
     duration: '25 hours',
     lessonsCount: 68,
     level: 'Beginner',
-    thumbnail: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&h=450&fit=crop',
+    thumbnail: courseGraphicDesign,
     previewVideo: 'https://cdn.pixabay.com/video/2021/04/06/69893-533515618_large.mp4',
     youtubePreviewId: 'YqQx75OPRa0',
     isFeatured: true,
@@ -529,7 +539,7 @@ export const courses: Course[] = [
     duration: '15 hours',
     lessonsCount: 42,
     level: 'Beginner',
-    thumbnail: 'https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800&h=450&fit=crop',
+    thumbnail: courseVideoEditing,
     previewVideo: 'https://cdn.pixabay.com/video/2016/09/21/5106-183629262_large.mp4',
     youtubePreviewId: 'LKnqECcg6Gw',
     lastUpdated: 'October 2024',
@@ -580,7 +590,7 @@ export const courses: Course[] = [
     duration: '20 hours',
     lessonsCount: 55,
     level: 'Beginner',
-    thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=450&fit=crop',
+    thumbnail: courseDataAnalysis,
     previewVideo: 'https://cdn.pixabay.com/video/2020/08/12/46966-449626928_large.mp4',
     youtubePreviewId: 'Vl0H-qTclOg',
     isFeatured: true,
@@ -631,7 +641,7 @@ export const courses: Course[] = [
     duration: '35 hours',
     lessonsCount: 85,
     level: 'Intermediate',
-    thumbnail: 'https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=800&h=450&fit=crop',
+    thumbnail: courseWebDev,
     previewVideo: 'https://cdn.pixabay.com/video/2020/03/21/33444-399959023_large.mp4',
     youtubePreviewId: 'VPvVD8t02U8',
     isTrending: true,

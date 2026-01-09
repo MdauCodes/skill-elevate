@@ -5,6 +5,7 @@ import { Search, ArrowRight, BookOpen, Briefcase, Award, Star, Users, CheckCircl
 // Human-centric images of Kenyan professionals
 import heroGenzImage from '@/assets/hero-genz-tech.jpg';
 import heroTutorImage from '@/assets/hero-tutor.jpg';
+import heroProfessionalsImage from '@/assets/hero-kenyan-professionals.jpg';
 import learnerSuccessImage from '@/assets/learner-success.jpg';
 import skilledDeveloperImage from '@/assets/skilled-developer.jpg';
 import jobPlacementImage from '@/assets/job-placement-success.jpg';
@@ -21,6 +22,7 @@ import { courses, categories, testimonials, jobs, tutors } from '@/data/mockData
 const heroImages = [
   { src: heroGenzImage, alt: "Kenyan Gen-Z tech professional" },
   { src: heroTutorImage, alt: "Kenyan tech instructor teaching" },
+  { src: heroProfessionalsImage, alt: "Kenyan professionals collaborating" },
 ];
 
 // Category tabs for filtering
@@ -87,7 +89,10 @@ const Index = () => {
               key={index}
               src={image.src} 
               alt={image.alt}
-              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+              style={{
+                transition: 'opacity 1.5s cubic-bezier(0.4, 0, 0.2, 1)',
+              }}
+              className={`absolute inset-0 w-full h-full object-cover ${
                 index === currentHeroIndex ? 'opacity-100' : 'opacity-0'
               }`}
             />

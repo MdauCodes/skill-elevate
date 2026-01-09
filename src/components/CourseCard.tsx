@@ -33,8 +33,8 @@ export function CourseCard({ course, variant = 'default' }: CourseCardProps) {
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
           />
-          {/* Subtle color overlay to soften AI look */}
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-foreground/10 to-transparent" />
+          {/* Color overlay + blur to soften AI look */}
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 via-primary/15 to-foreground/10 backdrop-blur-[0.5px]" />
           {/* Category Label */}
           <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 bg-background/90 backdrop-blur-sm rounded text-[9px] font-semibold text-foreground uppercase tracking-wide">
             {course.category.name}
@@ -69,8 +69,8 @@ export function CourseCard({ course, variant = 'default' }: CourseCardProps) {
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
           />
-          {/* Subtle color overlay to soften AI look */}
-          <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-foreground/10 to-transparent" />
+          {/* Color overlay + blur to soften AI look */}
+          <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 via-primary/15 to-foreground/10 backdrop-blur-[0.5px]" />
           {/* Category Label */}
           <div className="absolute top-1 left-1 px-1.5 py-0.5 bg-background/90 backdrop-blur-sm rounded text-[8px] font-semibold text-foreground uppercase tracking-wide">
             {course.category.name}
@@ -106,8 +106,8 @@ export function CourseCard({ course, variant = 'default' }: CourseCardProps) {
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
         />
-        {/* Subtle color overlay to soften AI look */}
-        <div className="absolute inset-0 bg-gradient-to-t from-foreground/40 via-foreground/10 to-transparent" />
+        {/* Color overlay + blur to soften AI look */}
+        <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 via-primary/15 to-foreground/10 backdrop-blur-[0.5px]" />
         {/* Category Label - makes images look less AI */}
         <div className="absolute top-2 left-2 px-2 py-1 bg-background/90 backdrop-blur-sm rounded text-[10px] font-semibold text-foreground uppercase tracking-wide shadow-sm">
           {course.category.name}

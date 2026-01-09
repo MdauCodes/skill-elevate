@@ -33,6 +33,10 @@ export function CourseCard({ course, variant = 'default' }: CourseCardProps) {
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
           />
+          {/* Category Label */}
+          <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 bg-background/90 backdrop-blur-sm rounded text-[9px] font-semibold text-foreground uppercase tracking-wide">
+            {course.category.name}
+          </div>
         </div>
         <div className="p-3">
           <h3 className="font-semibold text-sm line-clamp-2 text-foreground group-hover:text-primary transition-colors">
@@ -63,6 +67,10 @@ export function CourseCard({ course, variant = 'default' }: CourseCardProps) {
             className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
             loading="lazy"
           />
+          {/* Category Label */}
+          <div className="absolute top-1 left-1 px-1.5 py-0.5 bg-background/90 backdrop-blur-sm rounded text-[8px] font-semibold text-foreground uppercase tracking-wide">
+            {course.category.name}
+          </div>
         </div>
         <div className="flex-1 min-w-0">
           <h3 className="font-semibold text-sm line-clamp-1 text-foreground group-hover:text-primary transition-colors">
@@ -86,7 +94,7 @@ export function CourseCard({ course, variant = 'default' }: CourseCardProps) {
       to={`/courses/${course.slug}`}
       className="group block bg-background border border-border overflow-hidden card-hover"
     >
-      {/* Thumbnail */}
+      {/* Thumbnail with category label */}
       <div className="relative aspect-video overflow-hidden bg-muted">
         <img
           src={course.thumbnail}
@@ -94,6 +102,10 @@ export function CourseCard({ course, variant = 'default' }: CourseCardProps) {
           className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
           loading="lazy"
         />
+        {/* Category Label - makes images look less AI */}
+        <div className="absolute top-2 left-2 px-2 py-1 bg-background/90 backdrop-blur-sm rounded text-[10px] font-semibold text-foreground uppercase tracking-wide shadow-sm">
+          {course.category.name}
+        </div>
         {/* Hover Preview Overlay */}
         <div className="absolute inset-0 bg-foreground/80 opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex items-center justify-center">
           <span className="text-background font-medium text-sm">Preview</span>

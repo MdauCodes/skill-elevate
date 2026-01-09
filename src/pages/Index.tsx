@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Search, ArrowRight, BookOpen, Briefcase, Award, Star, Users, CheckCircle, TrendingUp, GraduationCap, Building2 } from 'lucide-react';
 
 // Human-centric images of Kenyan professionals
-import heroImage from '@/assets/hero-genz-tech.jpg';
+import heroGenzImage from '@/assets/hero-genz-tech.jpg';
+import heroTutorImage from '@/assets/hero-tutor.jpg';
 import learnerSuccessImage from '@/assets/learner-success.jpg';
 import skilledDeveloperImage from '@/assets/skilled-developer.jpg';
 import jobPlacementImage from '@/assets/job-placement-success.jpg';
@@ -15,6 +16,12 @@ import { TestimonialCard } from '@/components/TestimonialCard';
 import { JobCard } from '@/components/JobCard';
 import { TutorCard } from '@/components/TutorCard';
 import { courses, categories, testimonials, jobs, tutors } from '@/data/mockData';
+
+// Hero slideshow images
+const heroImages = [
+  { src: heroGenzImage, alt: "Kenyan Gen-Z tech professional" },
+  { src: heroTutorImage, alt: "Kenyan tech instructor teaching" },
+];
 
 // Category tabs for filtering
 const categoryTabs = ['All', 'Web Development', 'Digital Marketing', 'AI & Machine Learning', 'Graphic Design', 'Business'];
@@ -41,7 +48,16 @@ const howItWorks = [
 const Index = () => {
   const [activeCategory, setActiveCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
+  const [currentHeroIndex, setCurrentHeroIndex] = useState(0);
   const navigate = useNavigate();
+
+  // Auto-rotate hero images
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHeroIndex((prev) => (prev + 1) % heroImages.length);
+    }, 5000); // Change every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
 
   // Filter courses based on category
   const filteredCourses = activeCategory === 'All' 
@@ -62,15 +78,20 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <Header />
       
-      {/* 1. Hero Section - Image as background with text overlay */}
+      {/* 1. Hero Section - Slideshow background with text overlay */}
       <section className="relative min-h-[500px] md:min-h-[550px] overflow-hidden">
-        {/* Background Image */}
+        {/* Background Images Slideshow */}
         <div className="absolute inset-0">
-          <img 
-            src={heroImage} 
-            alt="Kenyan professionals collaborating" 
-            className="w-full h-full object-cover"
-          />
+          {heroImages.map((image, index) => (
+            <img 
+              key={index}
+              src={image.src} 
+              alt={image.alt}
+              className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out ${
+                index === currentHeroIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+            />
+          ))}
           {/* Gradient Overlay for text legibility */}
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/85 to-background/60" />
         </div>
@@ -409,7 +430,7 @@ const Index = () => {
       <section className="py-10 md:py-14 bg-secondary/30 relative overflow-hidden">
         {/* Subtle background image overlay */}
         <div className="absolute inset-0 opacity-5">
-          <img src={heroImage} alt="" className="w-full h-full object-cover" aria-hidden="true" />
+          <img src={heroGenzImage} alt="" className="w-full h-full object-cover" aria-hidden="true" />
         </div>
         
         <div className="container mx-auto px-4 relative z-10">

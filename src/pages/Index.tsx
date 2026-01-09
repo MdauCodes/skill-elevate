@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Search, ArrowRight, BookOpen, Briefcase, Award, Star, Users, CheckCircle, TrendingUp, GraduationCap, Building2 } from 'lucide-react';
 
 // Human-centric images of Kenyan professionals
-import heroImage from '@/assets/hero-kenyan-professionals.jpg';
+import heroImage from '@/assets/hero-genz-tech.jpg';
 import learnerSuccessImage from '@/assets/learner-success.jpg';
 import skilledDeveloperImage from '@/assets/skilled-developer.jpg';
 import jobPlacementImage from '@/assets/job-placement-success.jpg';

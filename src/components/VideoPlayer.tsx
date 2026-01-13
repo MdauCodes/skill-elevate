@@ -7,9 +7,11 @@ interface VideoPlayerProps {
   poster?: string;
   title?: string;
   onComplete?: () => void;
+  initialTime?: number;
+  onTimeUpdate?: (currentTime: number) => void;
 }
 
-export function VideoPlayer({ src, poster, title, onComplete }: VideoPlayerProps) {
+export function VideoPlayer({ src, poster, title, onComplete, initialTime = 0, onTimeUpdate }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -28,10 +30,18 @@ export function VideoPlayer({ src, poster, title, onComplete }: VideoPlayerProps
     const handleLoadedMetadata = () => {
       setDuration(video.duration);
       setIsLoading(false);
+      // Set initial playback position
+      if (initialTime > 0 && video.currentTime === 0) {
+        video.currentTime = initialTime;
+      }
     };
 
-    const handleTimeUpdate = () => {
+    const handleVideoTimeUpdate = () => {
       setCurrentTime(video.currentTime);
+      // Call external time update callback
+      if (onTimeUpdate) {
+        onTimeUpdate(video.currentTime);
+      }
       if (video.currentTime >= video.duration - 0.5 && onComplete) {
         onComplete();
       }
@@ -41,17 +51,17 @@ export function VideoPlayer({ src, poster, title, onComplete }: VideoPlayerProps
     const handlePause = () => setIsPlaying(false);
 
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
-    video.addEventListener('timeupdate', handleTimeUpdate);
+    video.addEventListener('timeupdate', handleVideoTimeUpdate);
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
 
     return () => {
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
-      video.removeEventListener('timeupdate', handleTimeUpdate);
+      video.removeEventListener('timeupdate', handleVideoTimeUpdate);
       video.removeEventListener('play', handlePlay);
       video.removeEventListener('pause', handlePause);
     };
-  }, [onComplete]);
+  }, [onComplete, initialTime, onTimeUpdate]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;
